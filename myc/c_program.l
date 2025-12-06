@@ -32,6 +32,7 @@ define  {return DEFINE;}
 
 array   {return ARRAY;}
 while   {return WHILE;}
+for     {return FOR;}
 if      {return IF;}
 else    {return ELSE;}
 [a-zA-Z][a-zA-Z0-9]* {

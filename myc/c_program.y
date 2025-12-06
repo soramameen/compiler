@@ -12,13 +12,13 @@
 
 %token ASSIGN SEMIC DEFINE  <num>NUMBER <str>IDENT
 
-%token EQ LT GT LE GE NE
+%token EQ NE LE GE LT GT
 
 %token  PLUS MINUS MUL DIV
 
 %token L_PAREN R_PAREN L_BRACE R_BRACE L_BRACKET R_BRACKET
 
-%token ARRAY WHILE IF ELSE
+%token ARRAY WHILE FOR IF ELSE
 
 %%
 
@@ -33,6 +33,7 @@ declarations /* 変数宣言部 */
 decl_statement /* 宣言文 */
     : DEFINE IDENT SEMIC {printf("OK! ident=%s\n",$2);}
     | ARRAY IDENT L_BRACKET NUMBER R_BRACKET SEMIC {printf("OK! array ident=%s size=%d\n",$2,$4);}
+    | ARRAY IDENT L_BRACKET NUMBER R_BRACKET L_BRACKET NUMBER R_BRACKET SEMIC {printf("OK! array ident=%s size=%d\n",$2,$4);}
 ;
 statements /* 文集合 */
     : statement statements
@@ -48,6 +49,7 @@ statement /* 文 */
 assignment_stmt /* 代入文 */
     : IDENT ASSIGN expression SEMIC
     | IDENT L_BRACKET expression R_BRACKET ASSIGN expression SEMIC
+    | IDENT L_BRACKET expression R_BRACKET L_BRACKET expression R_BRACKET ASSIGN expression SEMIC
 ;
 
 expression /* 算術式 */
@@ -78,10 +80,12 @@ var /* 変数 */
     : IDENT
     | NUMBER
     | IDENT L_BRACKET expression R_BRACKET
+    | IDENT L_BRACKET expression R_BRACKET L_BRACKET expression R_BRACKET
 ;
 
 loop_stmt /* ループ文 */
     : WHILE L_PAREN condition R_PAREN L_BRACE statements R_BRACE
+    | FOR L_PAREN assignment_stmt condition SEMIC IDENT ASSIGN expression R_PAREN L_BRACE statements R_BRACE
 ;
 
 cond_stmt /* 条件文 */
