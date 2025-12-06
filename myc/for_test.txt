@@ -1,0 +1,5 @@
+define k;
+for(k=0;k<2;k=k+1){
+matrix3[i][j] = matrix3[i][j] + matrix1[i][k] * matrix2[k][j];
+}
+
