@@ -1,13 +1,13 @@
 %{
-	#include <stdio.h>
-	#include "c_program.tab.h"
-	extern int yylex();
-	extern int yyerror();
+  #include <stdio.h>
+  #include "c_program.tab.h"
+  extern int yylex();
+  extern int yyerror();
 %}
 
 %union{
-	int num;
-	char* str;	
+  int num;
+  char* str;	
 }
 
 %token ASSIGN SEMIC DEFINE  <num>NUMBER <str>IDENT
@@ -44,10 +44,10 @@ statement /* 文 */
     | loop_stmt
     | cond_stmt
 ;
-/* ここより上は確認済み */
+
 assignment_stmt /* 代入文 */
     : IDENT ASSIGN expression SEMIC
-    | IDENT L_BRACKET NUMBER R_BRACKET ASSIGN expression SEMIC
+    | IDENT L_BRACKET expression R_BRACKET ASSIGN expression SEMIC
 ;
 
 expression /* 算術式 */
@@ -61,7 +61,7 @@ term /* 項 */
 ;
 
 factor /* 因子 */
-    : NUMBER
+    : var 
     | L_PAREN expression R_PAREN
 ;
 
@@ -77,7 +77,7 @@ mul_op /* 乗除演算子 */
 var /* 変数 */
     : IDENT
     | NUMBER
-    | IDENT L_BRACKET NUMBER R_BRACKET
+    | IDENT L_BRACKET expression R_BRACKET
 ;
 
 loop_stmt /* ループ文 */
@@ -95,6 +95,9 @@ condition /* 条件式 */
 
 cond_op /* 比較演算子 */
     : EQ
+    | NE
+    | LE
+    | GE
     | LT
     | GT
 ;
@@ -104,9 +107,9 @@ cond_op /* 比較演算子 */
 %%
 
 int main(void) {
-	if(yyparse()){
-	  fprintf(stderr, "Error!\n");
-	  return 1;
-	}
-	return 0;
+  if(yyparse()){
+    fprintf(stderr, "Error!\n");
+    return 1;
+  }
+  return 0;
 }

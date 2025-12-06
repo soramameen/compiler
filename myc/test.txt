@@ -1,0 +1,10 @@
+define MAX;
+array date[3];
+MAX = 100;
+if (a >= 10) {
+    b = a + 5;
+} else {
+    while (c == 0) {
+        c = c - 1;
+    }
+}

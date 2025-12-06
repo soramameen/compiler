@@ -50,7 +50,7 @@ all: $(TARGETS)
 	bison -d $<
 	
 	# 2. Flex
-	flex $*.l
+	flex -d $*.l
 	
 	# 3. Compile
 	# $(CFLAGS) と $(LIBS) がOSによって自動で切り替わります
