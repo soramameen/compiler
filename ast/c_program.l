@@ -1,5 +1,5 @@
 %{
-#include "c_program.tab.h"
+#include "define_and_assign_num.tab.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
