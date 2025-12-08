@@ -15,6 +15,7 @@ typedef enum {
     ADD_AST,
     MINUS_AST,
     MUL_AST,
+    DIV_AST,
     PROGRAM_AST
 } NType;
 

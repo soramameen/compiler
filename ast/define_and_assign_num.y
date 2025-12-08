@@ -60,6 +60,9 @@ term
     : term MUL factor {
         $$ = build_node2(MUL_AST, $1, $3);
     }
+    | term DIV factor {
+        $$ = build_node2(DIV_AST, $1, $3);
+    }
     | factor {
         $$ = $1
     }
