@@ -2,12 +2,11 @@
 #include <stdio.h>
 #include "ast.h"
 
-extern Node *top; /* ast.c で定義したルートノード */
+extern Node *top; 
 extern int yylex();
 extern void yyerror(char *s);
 %}
 
-/* ▼ 型定義: ノード(np)を使うことを宣言 */
 %union {
     struct node *np;
     int num;
@@ -43,15 +42,13 @@ program
 
 expression
     : expression PLUS term {
-        /* ★ここで足し算のノードを作る！ */
-        /* 左の式($1) + 右の項($3) */
+
         $$ = build_node2(ADD_AST, $1, $3);
     }
     | expression MINUS term {
         $$ = build_node2(MINUS_AST, $1, $3);
     }
     | term {
-        /* 足し算じゃない場合、そのままスルー */
         $$ = $1;
     }
 ;
@@ -72,7 +69,7 @@ factor
     : NUMBER {
         /* 数字の葉っぱを作る */
         /* 本当は数値を保存するけど、今は形でOK */
-        $$ = build_node0(NUMBER_AST);
+        $$ = build_num_node($1);
     }
 ;
 

@@ -6,11 +6,10 @@ UNAME_S := $(shell uname -s)
 #====================================================
 # 2. ファイルと設定
 #====================================================
-# ここでファイル名を指定します
-TARGET     = define_and_assign_num
-YACC_FILE  = define_and_assign_num.y
-LEX_FILE   = c_program.l
-C_SOURCES  = ast.c
+TARGET      = simple
+YACC_FILE   = simple.y
+LEX_FILE    = c_program.l
+C_SOURCES   = ast.c
 
 CC = gcc
 
@@ -18,20 +17,10 @@ CC = gcc
 # 3. OSごとの設定切り替え
 #====================================================
 ifeq ($(UNAME_S),Darwin)
-    #------------------------------------------------
-    # [Mac (Darwin)] の場合
-    #------------------------------------------------
-    # HomebrewのFlexパスを取得
     FLEX_PATH = $(shell brew --prefix flex)
-
-    # インクルードパスとライブラリパスの設定
     CFLAGS = -I$(FLEX_PATH)/include
     LIBS   = -L$(FLEX_PATH)/lib -lfl -ly
-
 else
-    #------------------------------------------------
-    # [Linux] の場合
-    #------------------------------------------------
     CFLAGS =
     LIBS   = -lfl -ly
 endif
@@ -43,14 +32,8 @@ endif
 all: $(TARGET)
 
 $(TARGET): $(YACC_FILE) $(LEX_FILE) $(C_SOURCES)
-	# 1. Bison (ヘッダファイルも生成)
 	bison -d $(YACC_FILE)
-
-	# 2. Flex
 	flex $(LEX_FILE)
-
-	# 3. Compile
-	# ast.c (C_SOURCES) も含めてコンパイルします
 	$(CC) $(CFLAGS) define_and_assign_num.tab.c lex.yy.c $(C_SOURCES) -o $@ $(LIBS)
 
 #====================================================
@@ -59,4 +42,14 @@ $(TARGET): $(YACC_FILE) $(LEX_FILE) $(C_SOURCES)
 clean:
 	rm -f $(TARGET) define_and_assign_num.tab.c define_and_assign_num.tab.h lex.yy.c
 
-.PHONY: all clean
+#====================================================
+# 6. テスト実行 (ここを追加！)
+#====================================================
+test: $(TARGET)
+	@echo "----------------------------------------"
+	@echo "Testing with test.txt..."
+	@echo "----------------------------------------"
+	./$(TARGET) < test.txt
+
+# .PHONY に test を追加するのを忘れずに
+.PHONY: all clean test

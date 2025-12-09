@@ -882,33 +882,34 @@ case 25:
 YY_RULE_SETUP
 #line 38 "c_program.l"
 {
-  yylval.str = (char*)malloc(sizeof(char) * yyleng);
+  yylval.str = (char*)malloc(sizeof(char) * yyleng + 1);
   strncpy(yylval.str, yytext, yyleng);
+  yylval.str[yyleng] = '\0';
   return IDENT;
 }
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 43 "c_program.l"
+#line 44 "c_program.l"
 {yylval.num = atoi(yytext); return NUMBER;}
 	YY_BREAK
 case 27:
 /* rule 27 can match eol */
 YY_RULE_SETUP
-#line 44 "c_program.l"
-
+#line 45 "c_program.l"
+{}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 45 "c_program.l"
+#line 46 "c_program.l"
 {return yytext[0];}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 47 "c_program.l"
+#line 48 "c_program.l"
 ECHO;
 	YY_BREAK
-#line 911 "lex.yy.c"
+#line 912 "lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1913,6 +1914,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 47 "c_program.l"
+#line 48 "c_program.l"
 
 

@@ -10,26 +10,33 @@ typedef enum {
     IDENT_AST = 0,
     IDENTS_AST,
     NUMBER_AST,
+    STR_AST,
     STATEMENTS_AST,
     STATEMENT_AST,
     ADD_AST,
     MINUS_AST,
     MUL_AST,
     DIV_AST,
-    PROGRAM_AST
+    PROGRAM_AST,
 } NType;
 
 /* ノード構造体 (ここでリスト構造を定義) */
 typedef struct node {
     NType type;
-    struct node *child;   /* 子供 (リストの先頭) */
-    struct node *brother; /* 兄弟 (リストの続き) */
+    struct node *child;
+    struct node *brother;
+
+    int ival;
+    char* str;
 } Node;
 
 /* プロトタイプ宣言 */
 Node *build_node0(NType t);
 Node *build_node1(NType t, Node *p1);
 Node *build_node2(NType t, Node *p1, Node *p2);
+
+Node *build_num_node(int n);
+
 void print_node_type(int node_type);
 void print_tree_in_json(Node *n);
 

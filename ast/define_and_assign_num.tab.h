@@ -100,7 +100,7 @@
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 11 "define_and_assign_num.y"
+#line 10 "define_and_assign_num.y"
 {
     struct node *np;
     int num;

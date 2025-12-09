@@ -42,23 +42,31 @@ Node *build_node1(NType t, Node *p1) {
     return p;
 }
 
-/* ノード生成 (子供2つ = リスト連結) */
 Node *build_node2(NType t, Node *p1, Node *p2) {
     Node *p = (Node *)malloc(sizeof(Node));
     if (p == NULL) yyerror("out of memory");
     p->type = t;
-    p->child = p1;          /* 先頭の子 */
+    p->child = p1;
     if (p1 != NULL) {
-        p1->brother = p2;   /* ★ここで兄弟(次の要素)を繋いでリストにする */
+        p1->brother = p2;
     }
     p->brother = NULL;
+    return p;
+}
+
+Node *build_num_node(int n) {
+    Node *p = (Node *)malloc(sizeof(Node));
+    p->type = NUMBER_AST;
+    p->ival = n;
     return p;
 }
 
 /* 再帰的に木をJSON形式で表示する関数 [cite: 314-325] */
 int print_tree(Node *n, int num) {
     printf("\"%s_%d\": {", node_types[n->type], num++);
-    
+    if (n->type == NUMBER_AST) {
+        printf("\"value\": %d, ", n->ival);
+    }
     if (n->child != NULL) {
         num = print_tree(n->child, num);
     }
@@ -78,17 +86,16 @@ void print_tree_in_json(Node *n) {
         printf("}\n");
     }
 }
-
-/* main関数 (ここから実行開始) [cite: 105-113] */
+// ---------------------------- 
+// main関数
+// ----------------------------
 int main(void) {
     if (yyparse()) {
         fprintf(stderr, "Error!\n");
         return 1;
     }
-    /* AST生成完了 */
     printf("[*] AST generation is completed\n");
     
-    /* JSONを出力 */
     print_tree_in_json(top);
     
     return 0;

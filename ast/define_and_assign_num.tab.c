@@ -131,7 +131,7 @@
 #include <stdio.h>
 #include "ast.h"
 
-extern Node *top; /* ast.c で定義したルートノード */
+extern Node *top; 
 extern int yylex();
 extern void yyerror(char *s);
 
@@ -156,7 +156,7 @@ extern void yyerror(char *s);
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
 typedef union YYSTYPE
-#line 11 "define_and_assign_num.y"
+#line 10 "define_and_assign_num.y"
 {
     struct node *np;
     int num;
@@ -462,7 +462,7 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    38,    38,    45,    50,    53,    60,    63,    66,    72
+       0,    37,    37,    44,    48,    51,    57,    60,    63,    69
 };
 #endif
 
@@ -1367,7 +1367,7 @@ yyreduce:
   switch (yyn)
     {
         case 2:
-#line 38 "define_and_assign_num.y"
+#line 37 "define_and_assign_num.y"
     {
         /* 計算結果(expression)をプログラム全体のルートにする */
         top = build_node1(PROGRAM_AST, (yyvsp[(1) - (1)].np));
@@ -1375,62 +1375,60 @@ yyreduce:
     break;
 
   case 3:
-#line 45 "define_and_assign_num.y"
+#line 44 "define_and_assign_num.y"
     {
-        /* ★ここで足し算のノードを作る！ */
-        /* 左の式($1) + 右の項($3) */
+
         (yyval.np) = build_node2(ADD_AST, (yyvsp[(1) - (3)].np), (yyvsp[(3) - (3)].np));
     ;}
     break;
 
   case 4:
-#line 50 "define_and_assign_num.y"
+#line 48 "define_and_assign_num.y"
     {
         (yyval.np) = build_node2(MINUS_AST, (yyvsp[(1) - (3)].np), (yyvsp[(3) - (3)].np));
     ;}
     break;
 
   case 5:
-#line 53 "define_and_assign_num.y"
+#line 51 "define_and_assign_num.y"
     {
-        /* 足し算じゃない場合、そのままスルー */
         (yyval.np) = (yyvsp[(1) - (1)].np);
     ;}
     break;
 
   case 6:
-#line 60 "define_and_assign_num.y"
+#line 57 "define_and_assign_num.y"
     {
         (yyval.np) = build_node2(MUL_AST, (yyvsp[(1) - (3)].np), (yyvsp[(3) - (3)].np));
     ;}
     break;
 
   case 7:
-#line 63 "define_and_assign_num.y"
+#line 60 "define_and_assign_num.y"
     {
         (yyval.np) = build_node2(DIV_AST, (yyvsp[(1) - (3)].np), (yyvsp[(3) - (3)].np));
     ;}
     break;
 
   case 8:
-#line 66 "define_and_assign_num.y"
+#line 63 "define_and_assign_num.y"
     {
         (yyval.np) = (yyvsp[(1) - (1)].np)
     ;}
     break;
 
   case 9:
-#line 72 "define_and_assign_num.y"
+#line 69 "define_and_assign_num.y"
     {
         /* 数字の葉っぱを作る */
         /* 本当は数値を保存するけど、今は形でOK */
-        (yyval.np) = build_node0(NUMBER_AST);
+        (yyval.np) = build_num_node((yyvsp[(1) - (1)].num));
     ;}
     break;
 
 
 /* Line 1267 of yacc.c.  */
-#line 1434 "define_and_assign_num.tab.c"
+#line 1432 "define_and_assign_num.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
@@ -1644,6 +1642,6 @@ yyreturn:
 }
 
 
-#line 79 "define_and_assign_num.y"
+#line 76 "define_and_assign_num.y"
 
 
