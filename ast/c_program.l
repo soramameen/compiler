@@ -36,12 +36,13 @@ for     {return FOR;}
 if      {return IF;}
 else    {return ELSE;}
 [a-zA-Z][a-zA-Z0-9]* {
-  yylval.str = (char*)malloc(sizeof(char) * yyleng);
+  yylval.str = (char*)malloc(sizeof(char) * yyleng + 1);
   strncpy(yylval.str, yytext, yyleng);
+  yylval.str[yyleng] = '\0';
   return IDENT;
 }
 [0-9]+	{yylval.num = atoi(yytext); return NUMBER;}
-[ \t\n]+
+[ \t\n]+ {}
 .	{return yytext[0];}
 
 %%
