@@ -1,4 +1,4 @@
-#include "ast.h"
+#include "ast_simple.h"
 
 Node *top;
 
@@ -48,11 +48,6 @@ char *node_types[] = {
     "NUMBER_AST",
     "STATEMENTS_AST",
     "STATEMENT_AST",
-    "DECL_STATEMENT_AST",
-    "DECL_STATEMENTS_AST",
-    "ASSIGNMENT_STMT_AST",
-    "STR_AST",
-    "NUMBER_AST",
 };
 
 void print_tree_in_json(Node *n){

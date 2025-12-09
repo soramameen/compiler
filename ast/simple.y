@@ -1,10 +1,11 @@
 %{
 #include <stdio.h>
-#include "ast.h"
+#include "ast_simple.h"
 
-extern Node *top; 
+// extern Node *top; 
 extern int yylex();
-extern void yyerror(char *s);
+extern void yyerror(const char *s);
+extern Node* top;
 %}
 
 %union {
@@ -13,7 +14,7 @@ extern void yyerror(char *s);
     char *str;
 }
 /* トークン定義 */
-%token ASSIGN SEMIC DEFINE  <num>NUMBER <str>IDENT
+%token ASSIGN SEMIC DEFINE COMMA  <num>NUMBER <str>IDENT
 
 %token EQ NE LE GE LT GT
 
@@ -23,25 +24,27 @@ extern void yyerror(char *s);
 
 %token ARRAY WHILE FOR IF ELSE
 
+%type <np> statements statement idents
+%define parse.error verbose
+
 %left PLUS
 %left MUL
 
-/* ▼ 非終端記号はすべてノード(np)型にする */
-%type <np> program expression term factor
 
 %%
 
 /* --- 文法規則 --- */
 statements
-  :   statement statements
-  |   statement
+  :   statement statements{ top = build_node2(STATEMENTS_AST, $1, top);}
+  |   statement{top = build_node1(STATEMENTS_AST, $1);}
 ;
 statement
-  :   DEFINE idents SEMIC {printf("Define OK!\n");}
-  |   IDENT ASSIGN NUMBER SEMIC {printf("OK!indent=%s, num=%d\n", $1, $3);}
+  :   DEFINE idents SEMIC {$$ = build_node1(STATEMENTS_AST, $2);}
+  |   IDENT ASSIGN NUMBER SEMIC {$$ = build_node2(STATEMENT_AST,build_node0(IDENT_AST), build_node0(NUMBER_AST));}
 ;
 idents
-  :   IDENT COMMA idents {printf("OK! new ident=%s\n", $1);}
-  |   IDENT              {printf("OK! new ident=%s\n", $1);}
+  :   IDENT COMMA idents {$$ = build_node2(IDENTS_AST, build_node0(IDENT_AST), $3);}
+  |   IDENT              {$$ = build_node1(IDENTS_AST,build_node0(IDENT_AST));}
+
 ;
 %%

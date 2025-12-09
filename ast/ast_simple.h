@@ -1,18 +1,14 @@
-#ifndef AST_H
-#define AST_H
+#ifndef AST_SIMPLE_H
+#define AST_SIMPLE_H
 #include <stdio.h> 
 #include <stdlib.h>
 
 typedef enum{
     IDENT_AST=0,
     IDENTS_AST,
+    NUMBER_AST,
     STATEMENTS_AST,
     STATEMENT_AST,
-    DECL_STATEMENT_AST,
-    DECL_STATEMENTS_AST,
-    ASSIGNMENT_STMT_AST,
-    STR_AST,
-    NUMBER_AST,
 } NType;
 
 typedef struct node{
