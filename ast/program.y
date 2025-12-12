@@ -24,9 +24,9 @@ extern Node* top;
 
 %token ARRAY WHILE FOR IF ELSE
 
-%type <np> program declarations decl_statement statements statement assignment_stmt expression term factor 
+%type <np> program declarations decl_statement statements statement assignment_stmt expression term factor var condition loop_stmt cond_stmt
 %define parse.error verbose
-%type <num> add_op mul_op
+%type <num> add_op mul_op cond_op
 %left PLUS
 %left MUL
 
@@ -50,6 +50,8 @@ statements
 ;
 statement
     : assignment_stmt {$$ = build_node1(STATEMENT_AST, $1);}
+    | loop_stmt { $$ = build_node1(STATEMENT_AST,$1);}
+    | cond_stmt { $$ = build_node1(STATEMENT_AST,$1);}
 ;
 
 assignment_stmt
@@ -83,8 +85,10 @@ term /* 項 */
 ;
 
 factor /* 因子 */
-    :  {$$ = build_num_node($1);}
+    : var {$$ = $1;}
+| L_PAREN expression R_PAREN {$$ = $2;}
 ;
+
 add_op /* 加減演算子 */
     : PLUS {$$ = OP_PLUS;}
     | MINUS {$$ = OP_MINUS;}
@@ -94,6 +98,45 @@ mul_op /* 乗除演算子 */
     : MUL {$$ = OP_MUL;}
     | DIV {$$ = OP_DIV;}
 ;
+
+var /* 変数 */
+    : IDENT { $$ = build_node1(VAR_AST,build_ident_node($1));}
+    | NUMBER { $$ = build_node1(VAR_AST, build_num_node($1));}
+;
+
+loop_stmt /* ループ文 */
+    : WHILE L_PAREN condition R_PAREN L_BRACE statements R_BRACE { $$ = build_node2(WHILE_AST,$3, $6);} 
+;
+
+cond_stmt /* 条件文 */
+    : IF L_PAREN condition R_PAREN L_BRACE statements R_BRACE ELSE L_BRACE statements R_BRACE {$$ = build_node3(IF_AST, $3, $6, $10);}
+    | IF L_PAREN condition R_PAREN L_BRACE statements R_BRACE {$$ =build_node2(IF_AST, $3, $6);}
+;    
+condition /* 条件式 */
+    : expression cond_op expression {
+      if ($2 == OP_EQ) {
+          $$ = build_node2(EQ_AST, $1, $3);}
+      else if ($2 == OP_NE) {
+          $$ = build_node2(NE_AST, $1, $3);}
+      else if ($2 == OP_LE) {
+          $$ = build_node2(LE_AST, $1, $3);}
+      else if ($2 == OP_GE) {
+          $$ = build_node2(GE_AST, $1, $3);}
+      else if ($2 == OP_LT) {
+          $$ = build_node2(LT_AST, $1, $3);}
+      else if ($2 == OP_GT) {
+          $$ = build_node2(GT_AST, $1, $3);}
+    }
+;
+
+cond_op /* 比較演算子 */
+    : EQ { $$ = OP_EQ; }
+    | NE { $$ = OP_NE; }
+    | LE { $$ = OP_LE; }
+    | GE { $$ = OP_GE; }
+    | LT { $$ = OP_LT; }
+    | GT { $$ = OP_GT; }
+;    
 
 
 

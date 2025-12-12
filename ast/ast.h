@@ -25,6 +25,21 @@ typedef enum{
     OP_MINUS,
     OP_MUL,
     OP_DIV,
+    VAR_AST,
+    EQ_AST,
+    NE_AST,
+    LE_AST,
+    GE_AST,
+    LT_AST,
+    GT_AST,
+    OP_EQ,
+    OP_NE,
+    OP_LE,
+    OP_GE,
+    OP_LT,
+    OP_GT,
+    WHILE_AST,
+    IF_AST,
 } NType;
 
 typedef struct node{

@@ -476,7 +476,7 @@ int yy_flex_debug = 0;
 char *yytext;
 #line 1 "c_program.l"
 #line 2 "c_program.l"
-#include "simple.tab.h"
+#include "program.tab.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
