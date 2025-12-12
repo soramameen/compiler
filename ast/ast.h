@@ -13,12 +13,28 @@ typedef enum{
     ASSIGNMENT_STMT_AST,
     STR_AST,
     NUMBER_AST,
+    EXPRESSION_AST,
+    ADD_OP_AST,
+    PLUS_AST,
+    MINUS_AST,
+    TERM_AST,
+    FACTOR_AST,
+    MUL_AST,
+    DIV_AST,
+    OP_PLUS,
+    OP_MINUS,
+    OP_MUL,
+    OP_DIV,
 } NType;
 
 typedef struct node{
   NType type;
   struct node* child;
   struct node* brother;
+  union {
+    int ival;
+    char *sval;
+  } val;
 } Node;
 
 extern char *node_types[];
@@ -30,4 +46,7 @@ void yyerror(const char *s);
 Node *build_node0(NType t);
 Node *build_node1(NType t, Node *p1);
 Node *build_node2(NType t, Node *p1, Node *p2);
+Node* build_node3(NType t, Node* p1, Node* p2, Node* p3);
+Node* build_num_node(int n);
+Node* build_ident_node(char* s);
 #endif

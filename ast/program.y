@@ -24,9 +24,9 @@ extern Node* top;
 
 %token ARRAY WHILE FOR IF ELSE
 
-%type <np> program declarations decl_statement statements statement assignment_stmt 
+%type <np> program declarations decl_statement statements statement assignment_stmt expression term factor 
 %define parse.error verbose
-
+%type <num> add_op mul_op
 %left PLUS
 %left MUL
 
@@ -53,8 +53,48 @@ statement
 ;
 
 assignment_stmt
-    :IDENT ASSIGN NUMBER SEMIC {$$ =build_node2(ASSIGNMENT_STMT_AST,build_node0(STR_AST),build_node0(NUMBER_AST));}
+    :IDENT ASSIGN expression SEMIC {$$ =build_node2(ASSIGNMENT_STMT_AST,build_ident_node($1),$3);}
 ;
+
+expression /* 算術式 */
+    : expression add_op term {
+          if ($2 == OP_PLUS) {
+              $$ = build_node2(PLUS_AST, $1, $3);
+          }
+          else {
+              $$ = build_node2(MINUS_AST, $1, $3);
+          }
+      }
+
+    | term {$$ = $1;}
+;
+
+term /* 項 */
+    : term mul_op factor {
+          if ($2 == OP_MUL) {
+              $$ = build_node2(MUL_AST, $1, $3);
+          }
+          else {
+              $$ = build_node2(DIV_AST, $1, $3);
+          }
+      }
+
+    | factor {$$ = $1;}
+;
+
+factor /* 因子 */
+    :  {$$ = build_num_node($1);}
+;
+add_op /* 加減演算子 */
+    : PLUS {$$ = OP_PLUS;}
+    | MINUS {$$ = OP_MINUS;}
+;
+
+mul_op /* 乗除演算子 */
+    : MUL {$$ = OP_MUL;}
+    | DIV {$$ = OP_DIV;}
+;
+
 
 
 %%

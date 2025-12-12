@@ -34,7 +34,30 @@ Node *build_node2(NType t, Node *p1, Node *p2){
     return p;
 }
 
+Node* build_node3(NType t, Node* p1, Node* p2, Node* p3){
+    Node *p;
+    p = (Node *)malloc(sizeof(Node));
+    if (p== NULL){
+      yyerror("out of memory");
+    }
+    p->type = t;
+    p->child = p1;
+    p->child->brother = p2;
+    p->child->brother-> brother = p3;
+    return p;
+}
 
+Node *build_num_node(int n) {
+    Node* p = build_node0(NUMBER_AST);
+    p->val.ival = n;
+    return p;
+}
+
+Node *build_ident_node(char* s) {
+    Node* p = build_node0(IDENT_AST);
+    p->val.sval = s;
+    return p;
+}
 
 void print_node_type(int node_type) {
     printf("Node type: %s\n",node_types[node_type]);
@@ -43,9 +66,8 @@ void yyerror(const char *s) {
     fprintf(stderr, "Error: %s\n", s);
 }
 char *node_types[] = {
-    "INDENT_AST",
+    "IDENT_AST",
     "IDENTS_AST",
-    "NUMBER_AST",
     "STATEMENTS_AST",
     "STATEMENT_AST",
     "DECL_STATEMENT_AST",
@@ -53,6 +75,18 @@ char *node_types[] = {
     "ASSIGNMENT_STMT_AST",
     "STR_AST",
     "NUMBER_AST",
+    "EXPRESSION_AST",
+    "ADD_OP_AST",
+    "TERM_AST",
+    "FACTOR_AST",
+    "PLUS_AST",
+    "MINUS_AST",
+    "MUL_AST",
+    "DIV_AST",
+    "OP_PLUS",
+    "OP_MINUS",
+    "OP_MUL",
+    "OP_DIV",
 };
 
 void print_tree_in_json(Node *n){
@@ -66,6 +100,15 @@ void print_tree_in_json(Node *n){
 
 int print_tree(Node *n, int num){
     printf("\"%s_%d\": {", node_types[n->type], num++);
+    if(n->type == NUMBER_AST) {
+        printf("\"value\": %d", n->val.ival);
+        if (n->child != NULL) printf(", "); 
+    }
+    else if (n->type == IDENT_AST) { 
+      printf("\"value\": \"%s\"", n->val.sval);
+      if (n->child != NULL) printf(", ");
+    }
+
     if (n->child != NULL) {
       num = print_tree(n->child, num);
     }
