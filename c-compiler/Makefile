@@ -57,7 +57,7 @@ clean:
 #====================================================
 # 6. テスト実行
 #====================================================
-test_codegen: test_codegen.c codegen.c ast.c
+test_codegen: test_codegen.c codegen.c ast.c symbol_table.c
 	$(CC) -o $@ $^
 
 test: $(TARGET)
