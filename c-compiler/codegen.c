@@ -45,19 +45,25 @@ static void walk_ast(Node *n, FILE *fp) {
             {
                 int current_label_num = while_loop_count;
                 while_loop_count++;
-                fprintf(fp, "WHILE_LOOP_START_%d:\n", current_label_num);
+
+                fprintf(fp, "$WHILE_LOOP_START_%d:\n", current_label_num);
                 walk_ast(n->child, fp);
-                fprintf(fp, "  beq $v0, $zero, WHILE_LOOP_END_%d\n", current_label_num);
+                fprintf(fp, "  beq $v0, $zero, $WHILE_LOOP_END_%d\n", current_label_num);
+                fprintf(fp, "  nop\n");
                 walk_ast(n->child->brother, fp);
-                fprintf(fp, "  j WHILE_LOOP_START_%d\n", current_label_num);
-                fprintf(fp, "WHILE_LOOP_END_%d:\n", current_label_num);
+                fprintf(fp, "  j $WHILE_LOOP_START_%d\n", current_label_num);
+                fprintf(fp, "  nop\n");
+                fprintf(fp, "$WHILE_LOOP_END_%d:\n", current_label_num);
             }
             break;
+            
+
 
         case VAR_AST:
             var_name = n->child->val.sval;
             offset = symbol_table_get_address(var_name);
             fprintf(fp,"  lw $v0, %d($fp)\n", offset);
+            fprintf(fp,"  nop\n");
             break;    
 
         case NUMBER_AST:
@@ -122,26 +128,45 @@ void generate_code(Node *root, FILE *fp) {
     symbol_table_init();
     while_loop_count = 0; 
     find_declarations(root);
-    // --- アセンブリのヘッダ部分 ---
+
+    // --- ヘッダ (init, stop ブロック) ---
+    fprintf(fp, "INITIAL_GP = 0x10008000\n");
+    fprintf(fp, "INITIAL_SP = 0x7ffffffc\n");
+    fprintf(fp, "stop_service = 99\n\n");
     fprintf(fp, ".text\n");
-    fprintf(fp, ".globl main\n");
+    fprintf(fp, "init:\n");
+    fprintf(fp, "  la $gp, INITIAL_GP\n");
+    fprintf(fp, "  la $sp, INITIAL_SP\n");
+    fprintf(fp, "  jal main\n");
+    fprintf(fp, "  nop\n");
+    fprintf(fp, "  li $v0, stop_service\n");
+    fprintf(fp, "  syscall\n");
+    fprintf(fp, "  nop\n");
+    fprintf(fp, "stop:\n");
+    fprintf(fp, "  j stop\n");
+    fprintf(fp, "  nop\n\n");
+
+    // --- main 関数 ---
+    fprintf(fp, ".text\n");
     fprintf(fp, "main:\n");
-    // スタックフレームを設定
-    fprintf(fp, "  addu $fp, $sp, $zero\n");
+    
+    // --- 関数プロローグ ---
+    int frame_size = symbol_table_get_total_size() + 8; // 変数領域 + $ra, $fp の保存領域
+    fprintf(fp, "  addiu $sp, $sp, -%d\n", frame_size);
+    fprintf(fp, "  sw $ra, %d($sp)\n", frame_size - 4);
+    fprintf(fp, "  sw $fp, %d($sp)\n", frame_size - 8);
+    fprintf(fp, "  addiu $fp, $sp, %d\n", frame_size);
 
-    int total_var_size = symbol_table_get_total_size();
-
-    fprintf(fp, "  addi $sp, $sp,-%d\n", total_var_size);
     // --- ASTからメインのコードを生成 ---
     walk_ast(root, fp);
 
-    // --- プログラム終了処理 ---
-    // 最後の計算結果($v0)を終了コードとして返す
-    // MIPSのシステムコール:
-    // 1 (print_int): a0レジスタの整数を表示
-    // 17 (exit2): a0レジスタの値を終了コードとする
-    fprintf(fp, "  addu $sp, $fp, $zero\n");
-    fprintf(fp, "  addu $a0, $v0, $zero\n"); // 返したい値を$a0にコピー
-    fprintf(fp, "  li $v0, 17\n");   // exit2システムコール
-    fprintf(fp, "  syscall\n\n");
+    // --- 関数エピローグ ---
+    // 最終的な結果は $v0 に残っている想定
+    fprintf(fp, "  lw $ra, %d($sp)\n", frame_size - 4);
+    fprintf(fp, "  nop\n");
+    fprintf(fp, "  lw $fp, %d($sp)\n", frame_size - 8);
+    fprintf(fp, "  nop\n");
+    fprintf(fp, "  addiu $sp, $sp, %d\n", frame_size);
+    fprintf(fp, "  jr $ra\n");
+    fprintf(fp, "  nop\n");
 }

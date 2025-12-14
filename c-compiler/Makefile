@@ -52,12 +52,15 @@ $(TARGET): $(YACC_FILE) $(LEX_FILE) $(C_SOURCES)
 # 5. クリーンアップ
 #====================================================
 clean:
-	rm -f $(TARGET) *.tab.c *.tab.h lex.yy.c test_codegen
+	rm -f $(TARGET) *.tab.c *.tab.h lex.yy.c test_codegen test_sum
 
 #====================================================
 # 6. テスト実行
 #====================================================
 test_codegen: test_codegen.c codegen.c ast.c symbol_table.c
+	$(CC) -o $@ $^
+
+test_sum: test_sum.c codegen.c ast.c symbol_table.c
 	$(CC) -o $@ $^
 
 test: $(TARGET)
@@ -66,4 +69,4 @@ test: $(TARGET)
 	@echo "----------------------------------------"
 	./$(TARGET) < test.txt
 
-.PHONY: all clean test test_codegen
+.PHONY: all clean test test_codegen test_sum
