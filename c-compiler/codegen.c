@@ -139,6 +139,7 @@ void generate_code(Node *root, FILE *fp) {
     fprintf(fp, "  la $sp, INITIAL_SP\n");
     fprintf(fp, "  jal main\n");
     fprintf(fp, "  nop\n");
+    fprintf(fp, "  add $a0, $v0, $zero\n");
     fprintf(fp, "  li $v0, stop_service\n");
     fprintf(fp, "  syscall\n");
     fprintf(fp, "  nop\n");

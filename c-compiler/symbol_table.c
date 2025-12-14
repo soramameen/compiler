@@ -9,7 +9,7 @@ static int current_address_offset = 0;
 
 void symbol_table_init(){
     symbol_count=0;
-    current_address_offset =0;
+    current_address_offset =-8;
 }
 
 void symbol_table_add(char* name){

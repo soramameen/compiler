@@ -9,7 +9,7 @@ UNAME_S := $(shell uname -s)
 TARGET      = program
 YACC_FILE   = program.y
 LEX_FILE    = c_program.l
-C_SOURCES   = ast.c codegen.c symbol_table.c
+C_SOURCES   = main.c ast.c codegen.c symbol_table.c
 
 CC = gcc
 
@@ -69,4 +69,10 @@ test: $(TARGET)
 	@echo "----------------------------------------"
 	./$(TARGET) < test.txt
 
-.PHONY: all clean test test_codegen test_sum
+run_sum: test_sum
+	./test_sum > sum.s && maps -e sum.s
+
+run_kaizyo: program
+	./program < tests/kaizyo.c > kaizyo.s && maps -e kaizyo.s
+
+.PHONY: all clean test test_codegen test_sum run_sum run_kaizyo

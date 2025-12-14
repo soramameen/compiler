@@ -42,7 +42,7 @@ declarations /*変数宣言部*/
     | decl_statement { $$ = build_node1(DECL_STATEMENTS_AST, $1);}
 ;
 decl_statement /*宣言文*/
-    : DEFINE IDENT SEMIC { $$ = build_node1(DECL_STATEMENT_AST, build_node0(STR_AST));}
+    : DEFINE IDENT SEMIC { $$ = build_node1(DECL_STATEMENT_AST, build_ident_node($2));}
 
 statements
     : statement statements {$$ = build_node2(STATEMENTS_AST,$1,$2);}
@@ -52,6 +52,7 @@ statement
     : assignment_stmt {$$ = build_node1(STATEMENT_AST, $1);}
     | loop_stmt { $$ = build_node1(STATEMENT_AST,$1);}
     | cond_stmt { $$ = build_node1(STATEMENT_AST,$1);}
+    | expression SEMIC {$$ = build_node1(STATEMENT_AST, $1);}
 ;
 
 assignment_stmt /* 代入文 */
@@ -86,7 +87,8 @@ term /* 項 */
 
 factor /* 因子 */
     : var {$$ = $1;}
-| L_PAREN expression R_PAREN {$$ = $2;}
+    | NUMBER {$$ = build_num_node($1);}
+    | L_PAREN expression R_PAREN {$$ = $2;}
 ;
 
 add_op /* 加減演算子 */
@@ -101,7 +103,6 @@ mul_op /* 乗除演算子 */
 
 var /* 変数 */
     : IDENT { $$ = build_node1(VAR_AST,build_ident_node($1));}
-    | NUMBER { $$ = build_node1(VAR_AST, build_num_node($1));}
 ;
 
 loop_stmt /* ループ文 */
