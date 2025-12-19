@@ -1,6 +1,7 @@
 #include "codegen.h"
 #include "symbol_table.h"
 static int while_loop_count = 0;
+static int if_count = 0;
 static void push(const char* reg, FILE*fp){
     fprintf(fp,"  sw %s, -4($sp)\n",reg);
     fprintf(fp,"  addi $sp, $sp, -4\n");
@@ -57,12 +58,44 @@ static void walk_ast(Node *n, FILE *fp) {
             }
             break;
         case IF_AST:
-            // v0にe1を評価した後の値が入る。
-            walk_AST(n->child,fp);
-            
+            {
+                if_count ++;
+                int current_if = if_count;
+                // 評価
+                walk_ast(n->child, fp);
+                // then
+                Node *then_stmt = n->child->brother;
+                // else
+                Node *else_stmt = then_stmt->brother;
 
-            
+                if (else_stmt != NULL) {
+                    // if-else
+                    fprintf(fp, "  beq $v0, $zero, $IF_ELSE_%d\n", current_if);
+                    // 遅延分岐スロット
+                    nop(fp);
+                    // Then
+                    walk_ast(then_stmt, fp);
+                    fprintf(fp, "  j $IF_END_%d\n", current_if);
+                    // 遅延分岐スロット
+                    nop(fp);
 
+                    // Else
+                    fprintf(fp, "$IF_ELSE_%d:\n", current_if);
+                    walk_ast(else_stmt, fp);
+                    
+                    fprintf(fp, "$IF_END_%d:\n", current_if);
+                } else {
+                    // if
+                    fprintf(fp, "  beq $v0, $zero, $IF_END_%d\n", current_if);
+                    // 遅延分岐スロット
+                    nop(fp);
+                    // Then
+                    walk_ast(then_stmt, fp);
+                    // 終了ラベル
+                    fprintf(fp, "$IF_END_%d:\n", current_if);
+                }
+            }
+            break;
 
         case VAR_AST:
             var_name = n->child->val.sval;
@@ -110,14 +143,31 @@ static void walk_ast(Node *n, FILE *fp) {
             fprintf(fp,"  mflo $v0\n");
              break;
         /* a < b true->1, false->0 */ 
-        case LT_AST:
+          case LT_AST:
              walk_ast(n->child->brother, fp);
              push("$v0",fp);
              walk_ast(n->child, fp);
              pop("$v1",fp);
              fprintf(fp,"   slt $v0, $v0, $v1\n");
              break;
+
+        /* a == b true->1, false->0 */ 
+        case EQ_AST:
+             walk_ast(n->child->brother, fp);
+             push("$v0",fp);
+             walk_ast(n->child, fp);
+             pop("$v1",fp);
+             fprintf(fp,"   sub $v0, $v0, $v1\n");
+             nop(fp);
+             fprintf(fp,"   sltiu $v0, $v0, 1\n");
+             break;
+
+
         case DECL_STATEMENT_AST:
+             break;
+
+        case STATEMENTS_AST:
+             walk_ast(n->child,fp);
              break;
  
         default:
@@ -144,7 +194,7 @@ void generate_code(Node *root, FILE *fp) {
     fprintf(fp, "  la $sp, INITIAL_SP\n");
     fprintf(fp, "  jal main\n");
     nop(fp);
-    fprintf(fp, "  add $a0, $v0, $zero\n");
+    fprintf(fp, "  add $t0, $v0, $zero\n");
     fprintf(fp, "  li $v0, stop_service\n");
     fprintf(fp, "  syscall\n");
     nop(fp);

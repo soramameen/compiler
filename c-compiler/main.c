@@ -12,7 +12,7 @@ int main(void) {
     }
 
     // ASTが構築されていればJSON形式で表示 1：デバッグモード
-    if (1){
+    if (0){
       if (top != NULL) {
           printf("[*] AST generation is completed\n");
           print_tree_in_json(top);

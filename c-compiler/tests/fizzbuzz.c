@@ -7,7 +7,7 @@ fizz = 0;
 buzz = 0;
 fizzbuzz = 0;
 others = 0;
-i = 0;
+i = 1;
 while(i < 31){
   if((i / 15)*15 == i){
     fizzbuzz = fizzbuzz + 1;
@@ -24,3 +24,4 @@ while(i < 31){
   }
   i = i + 1;
 }
+others;
