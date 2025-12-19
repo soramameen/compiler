@@ -49,13 +49,18 @@ static void walk_ast(Node *n, FILE *fp) {
                 fprintf(fp, "$WHILE_LOOP_START_%d:\n", current_label_num);
                 walk_ast(n->child, fp);
                 fprintf(fp, "  beq $v0, $zero, $WHILE_LOOP_END_%d\n", current_label_num);
-                fprintf(fp, "  nop\n");
+                nop(fp); 
                 walk_ast(n->child->brother, fp);
                 fprintf(fp, "  j $WHILE_LOOP_START_%d\n", current_label_num);
-                fprintf(fp, "  nop\n");
+                nop(fp); 
                 fprintf(fp, "$WHILE_LOOP_END_%d:\n", current_label_num);
             }
             break;
+        case IF_AST:
+            // v0にe1を評価した後の値が入る。
+            walk_AST(n->child,fp);
+            
+
             
 
 
@@ -63,7 +68,7 @@ static void walk_ast(Node *n, FILE *fp) {
             var_name = n->child->val.sval;
             offset = symbol_table_get_address(var_name);
             fprintf(fp,"  lw $v0, %d($fp)\n", offset);
-            fprintf(fp,"  nop\n");
+            nop(fp); 
             break;    
 
         case NUMBER_AST:
@@ -138,20 +143,21 @@ void generate_code(Node *root, FILE *fp) {
     fprintf(fp, "  la $gp, INITIAL_GP\n");
     fprintf(fp, "  la $sp, INITIAL_SP\n");
     fprintf(fp, "  jal main\n");
-    fprintf(fp, "  nop\n");
+    nop(fp);
     fprintf(fp, "  add $a0, $v0, $zero\n");
     fprintf(fp, "  li $v0, stop_service\n");
     fprintf(fp, "  syscall\n");
-    fprintf(fp, "  nop\n");
+    nop(fp);
     fprintf(fp, "stop:\n");
     fprintf(fp, "  j stop\n");
-    fprintf(fp, "  nop\n\n");
+    nop(fp);
+    fprintf(fp, "\n");
 
     // --- main 関数 ---
     fprintf(fp, ".text\n");
     fprintf(fp, "main:\n");
     
-    // --- 関数プロローグ ---
+    // --- 関数開始処理 ---
     int frame_size = symbol_table_get_total_size() + 8; // 変数領域 + $ra, $fp の保存領域
     fprintf(fp, "  addiu $sp, $sp, -%d\n", frame_size);
     fprintf(fp, "  sw $ra, %d($sp)\n", frame_size - 4);
@@ -161,13 +167,12 @@ void generate_code(Node *root, FILE *fp) {
     // --- ASTからメインのコードを生成 ---
     walk_ast(root, fp);
 
-    // --- 関数エピローグ ---
-    // 最終的な結果は $v0 に残っている想定
+    // --- 関数終了処理 ---
     fprintf(fp, "  lw $ra, %d($sp)\n", frame_size - 4);
-    fprintf(fp, "  nop\n");
+    nop(fp); 
     fprintf(fp, "  lw $fp, %d($sp)\n", frame_size - 8);
-    fprintf(fp, "  nop\n");
+    nop(fp); 
     fprintf(fp, "  addiu $sp, $sp, %d\n", frame_size);
     fprintf(fp, "  jr $ra\n");
-    fprintf(fp, "  nop\n");
+    nop(fp); 
 }

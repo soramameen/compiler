@@ -75,4 +75,17 @@ run_sum: test_sum
 run_kaizyo: program
 	./program < tests/kaizyo.c > kaizyo.s && maps -e kaizyo.s
 
-.PHONY: all clean test test_codegen test_sum run_sum run_kaizyo
+run_fizzbuzz: program
+	./program < tests/fizzbuzz.c > fizzbuzz.s && maps -e fizzbuzz.s
+
+.PHONY: all clean test test_codegen test_sum run_sum run_kaizyo check_fizzbuzz
+
+check_fizzbuzz: $(TARGET)
+	@echo "Checking if tests/fizzbuzz.c can be parsed..."
+	./$(TARGET) < tests/fizzbuzz.c
+	@echo "Parse Success!"
+
+check_if_program: $(TARGET)
+	@echo "Checking if tests/if_program.c can be parsed..."
+	./$(TARGET) < tests/if_program.c
+	@echo "Parse Success!"
