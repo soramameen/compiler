@@ -67,5 +67,36 @@ label1:
 label2:
 ```
 こんな感じでいけそう。
-    
-    
+
+## トラブルシューティング: Thenブロックの後にElseブロックが実行される問題
+
+### 現象
+`if (cond) { ... } else { ... }` において、条件が真（True）の場合に Then ブロックが実行された後、続けて Else ブロックも実行されてしまう。
+
+### 原因
+`codegen.c` の `walk_ast` 関数において、`STATEMENTS_AST`（ブロック `{ ... }`）の専用処理がなく、`default` ラベルの処理が適用されていたことが原因。
+
+`default` の処理は以下のようになっていた：
+```c
+default:
+    walk_ast(n->child, fp);   // 子（ブロックの中身）を処理
+    walk_ast(n->brother, fp); // 兄弟（次のノード）を処理
+    break;
+```
+
+`IF_AST` の構造上、Thenブロック（`STATEMENTS_AST`）の `brother` は Elseブロック（`STATEMENTS_AST`）となっている。
+そのため、Thenブロックのコード生成を行った際、`default` ルートを通ると、自動的に `brother` である Elseブロックのコード生成も行われてしまっていた。
+
+### 解決策
+`STATEMENTS_AST` 用の `case` を追加し、`brother` を辿らず `child` のみを処理するように変更する。
+
+```c
+case STATEMENTS_AST:
+    // ブロック（{...}）の処理。
+    // ここでは中身（child）だけを処理し、
+    // brother（If文におけるElseブロックなど）には勝手に進まないようにする。
+    walk_ast(n->child, fp);
+    break;
+```
+
+これにより、Thenブロックの処理は「Thenブロックの中身」の生成だけで完了し、Elseブロックへの遷移制御（ジャンプ命令など）は親ノードである `IF_AST` のロジックが正しく行えるようになる。
