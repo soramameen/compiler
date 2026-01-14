@@ -1450,7 +1450,7 @@ yyreduce:
 
   case 7: /* decl_statement: ARRAY IDENT L_BRACKET NUMBER R_BRACKET L_BRACKET NUMBER R_BRACKET SEMIC  */
 #line 47 "program.y"
-                                                                              { (yyval.np) = build_node3(ARRAY_DECL_STATEMENT_AST, build_ident_node((yyvsp[-7].str)), build_num_node((yyvsp[-5].num)), build_num_node((yyvsp[-2].num)))}
+                                                                              { (yyval.np) = build_node3(ARRAY_DECL_STATEMENT_AST, build_ident_node((yyvsp[-7].str)), build_num_node((yyvsp[-5].num)), build_num_node((yyvsp[-2].num)));}
 #line 1455 "program.tab.c"
     break;
 
