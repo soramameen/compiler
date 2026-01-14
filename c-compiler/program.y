@@ -44,7 +44,7 @@ declarations /*変数宣言部*/
 decl_statement /*宣言文*/
     : DEFINE IDENT SEMIC { $$ = build_node1(DECL_STATEMENT_AST, build_ident_node($2));}
     | ARRAY IDENT L_BRACKET NUMBER R_BRACKET SEMIC { $$ = build_node2(ARRAY_DECL_STATEMENT_AST, build_ident_node($2), build_num_node($4));}
-    | ARRAY IDENT L_BRACKET NUMBER R_BRACKET L_BRACKET NUMBER R_BRACKET SEMIC { $$ = build_node3(ARRAY_DECL_STATEMENT_AST, build_ident_node($2), build_num_node($4), build_num_node($7))};
+    | ARRAY IDENT L_BRACKET NUMBER R_BRACKET L_BRACKET NUMBER R_BRACKET SEMIC { $$ = build_node3(ARRAY_DECL_STATEMENT_AST, build_ident_node($2), build_num_node($4), build_num_node($7));}
 
 statements
     : statement statements {$$ = build_node2(STATEMENTS_AST,$1,$2);}

@@ -21,6 +21,20 @@ static void find_declarations(Node* n){
       char* var_name = n->child->val.sval;
       symbol_table_add(var_name);
     }
+    else if(n->type == ARRAY_DECL_STATEMENT_AST){
+      if(n->child->brother->brother != NULL){
+        // 2次元配列: array arr[3][4];
+        char* arr_name = n->child->val.sval;
+        int rows = n->child->brother->val.ival;
+        int cols = n->child->brother->brother->val.ival;
+        symbol_table_add_array_2d(arr_name, rows, cols);
+      } else {
+        // 1次元配列: array arr[10];
+        char* arr_name = n->child->val.sval;
+        int size = n->child->brother->val.ival;
+        symbol_table_add_array(arr_name, size);
+      }
+    }
     find_declarations(n->child);
     find_declarations(n->brother);
 }
