@@ -71,6 +71,7 @@ char *node_types[] = {
     "STATEMENTS_AST",
     "STATEMENT_AST",
     "DECL_STATEMENT_AST",
+    "ARRAY_DECL_STATEMENT_AST",
     "DECL_STATEMENTS_AST",
     "ASSIGNMENT_STMT_AST",
     "STR_AST",
