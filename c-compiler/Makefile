@@ -81,8 +81,17 @@ run_fizzbuzz: program
 run_era: program
 	./program < tests/era.c > era.s && maps -e era.s
 
+run_le: program
+	./program < tests/test_le.c > test_le.s && maps -e test_le.s
 
-.PHONY: all clean test test_codegen test_sum run_sum run_kaizyo check_fizzbuzz
+run_ge: program
+	./program < tests/test_ge.c > test_ge.s && maps -e test_ge.s
+
+run_both: program
+	./program < tests/test_both.c > test_both.s && maps -e test_both.s
+
+
+.PHONY: all clean test test_codegen test_sum run_sum run_kaizyo run_le run_ge run_both check_fizzbuzz
 
 check_fizzbuzz: $(TARGET)
 	@echo "Checking if tests/fizzbuzz.c can be parsed..."

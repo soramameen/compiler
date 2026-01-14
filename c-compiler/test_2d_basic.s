@@ -8,7 +8,7 @@ init:
   la $sp, INITIAL_SP
   jal main
   nop
-  add $t0, $v0, $zero
+  add $a0, $v0, $zero
   li $v0, stop_service
   syscall
   nop
@@ -26,9 +26,9 @@ main:
   sw $v0, -4($sp)
   addi $sp, $sp, -4
   li $v0, 0
-  move $t0, $v0
+  add $t0, $v0, $zero
   li $v0, 0
-  move $t1, $v0
+  add $t1, $v0, $zero
   li $t2, 4
   mult $t0, $t2
   mflo $t3
@@ -43,9 +43,9 @@ main:
   sw $v0, -4($sp)
   addi $sp, $sp, -4
   li $v0, 0
-  move $t0, $v0
+  add $t0, $v0, $zero
   li $v0, 1
-  move $t1, $v0
+  add $t1, $v0, $zero
   li $t2, 4
   mult $t0, $t2
   mflo $t3
@@ -60,9 +60,9 @@ main:
   sw $v0, -4($sp)
   addi $sp, $sp, -4
   li $v0, 1
-  move $t0, $v0
+  add $t0, $v0, $zero
   li $v0, 0
-  move $t1, $v0
+  add $t1, $v0, $zero
   li $t2, 4
   mult $t0, $t2
   mflo $t3
@@ -77,9 +77,9 @@ main:
   sw $v0, -4($sp)
   addi $sp, $sp, -4
   li $v0, 1
-  move $t0, $v0
+  add $t0, $v0, $zero
   li $v0, 1
-  move $t1, $v0
+  add $t1, $v0, $zero
   li $t2, 4
   mult $t0, $t2
   mflo $t3
@@ -94,9 +94,9 @@ main:
   sw $v0, -4($sp)
   addi $sp, $sp, -4
   li $v0, 2
-  move $t0, $v0
+  add $t0, $v0, $zero
   li $v0, 3
-  move $t1, $v0
+  add $t1, $v0, $zero
   li $t2, 4
   mult $t0, $t2
   mflo $t3
@@ -108,9 +108,9 @@ main:
   addi $sp, $sp, 4
   sw $v0, 0($t3)
   li $v0, 1
-  move $t0, $v0
+  add $t0, $v0, $zero
   li $v0, 0
-  move $t1, $v0
+  add $t1, $v0, $zero
   li $t2, 4
   mult $t0, $t2
   mflo $t3

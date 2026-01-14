@@ -8,7 +8,7 @@ init:
   la $sp, INITIAL_SP
   jal main
   nop
-  add $t0, $v0, $zero
+  add $a0, $v0, $zero
   li $v0, stop_service
   syscall
   nop
@@ -22,81 +22,132 @@ main:
   sw $ra, 60($sp)
   sw $fp, 56($sp)
   addiu $fp, $sp, 64
-  li $v0, 1
-  sw $v0, -4($sp)
-  addi $sp, $sp, -4
-  li $v0, 0
-  move $t0, $v0
-  li $v0, 0
-  move $t1, $v0
-  li $t2, 4
-  mult $t0, $t2
-  mflo $t3
-  add $t3, $t3, $t1
-  sll $t3, $t3, 2
-  addi $t3, $t3, -56
-  add $t3, $fp, $t3
-  lw $v0, 0($sp)
-  addi $sp, $sp, 4
-  sw $v0, 0($t3)
-  li $v0, 2
-  sw $v0, -4($sp)
-  addi $sp, $sp, -4
-  li $v0, 0
-  move $t0, $v0
-  li $v0, 1
-  move $t1, $v0
-  li $t2, 4
-  mult $t0, $t2
-  mflo $t3
-  add $t3, $t3, $t1
-  sll $t3, $t3, 2
-  addi $t3, $t3, -56
-  add $t3, $fp, $t3
-  lw $v0, 0($sp)
-  addi $sp, $sp, 4
-  sw $v0, 0($t3)
-  li $v0, 10
-  sw $v0, -4($sp)
-  addi $sp, $sp, -4
-  li $v0, 1
-  move $t0, $v0
-  li $v0, 0
-  move $t1, $v0
-  li $t2, 4
-  mult $t0, $t2
-  mflo $t3
-  add $t3, $t3, $t1
-  sll $t3, $t3, 2
-  addi $t3, $t3, -56
-  add $t3, $fp, $t3
-  lw $v0, 0($sp)
-  addi $sp, $sp, 4
-  sw $v0, 0($t3)
-  li $v0, 20
-  sw $v0, -4($sp)
-  addi $sp, $sp, -4
-  li $v0, 1
-  move $t0, $v0
-  li $v0, 1
-  move $t1, $v0
-  li $t2, 4
-  mult $t0, $t2
-  mflo $t3
-  add $t3, $t3, $t1
-  sll $t3, $t3, 2
-  addi $t3, $t3, -56
-  add $t3, $fp, $t3
-  lw $v0, 0($sp)
-  addi $sp, $sp, 4
-  sw $v0, 0($t3)
   li $v0, 100
   sw $v0, -4($sp)
   addi $sp, $sp, -4
+  li $v0, 0
+  add $t0, $v0, $zero
+  li $v0, 0
+  add $t1, $v0, $zero
+  li $t2, 4
+  mult $t0, $t2
+  mflo $t3
+  add $t3, $t3, $t1
+  sll $t3, $t3, 2
+  addi $t3, $t3, -56
+  add $t3, $fp, $t3
+  lw $v0, 0($sp)
+  addi $sp, $sp, 4
+  sw $v0, 0($t3)
+  li $v0, 101
+  sw $v0, -4($sp)
+  addi $sp, $sp, -4
+  li $v0, 0
+  add $t0, $v0, $zero
+  li $v0, 1
+  add $t1, $v0, $zero
+  li $t2, 4
+  mult $t0, $t2
+  mflo $t3
+  add $t3, $t3, $t1
+  sll $t3, $t3, 2
+  addi $t3, $t3, -56
+  add $t3, $fp, $t3
+  lw $v0, 0($sp)
+  addi $sp, $sp, 4
+  sw $v0, 0($t3)
+  li $v0, 102
+  sw $v0, -4($sp)
+  addi $sp, $sp, -4
+  li $v0, 0
+  add $t0, $v0, $zero
   li $v0, 2
-  move $t0, $v0
+  add $t1, $v0, $zero
+  li $t2, 4
+  mult $t0, $t2
+  mflo $t3
+  add $t3, $t3, $t1
+  sll $t3, $t3, 2
+  addi $t3, $t3, -56
+  add $t3, $fp, $t3
+  lw $v0, 0($sp)
+  addi $sp, $sp, 4
+  sw $v0, 0($t3)
+  li $v0, 103
+  sw $v0, -4($sp)
+  addi $sp, $sp, -4
+  li $v0, 0
+  add $t0, $v0, $zero
   li $v0, 3
-  move $t1, $v0
+  add $t1, $v0, $zero
+  li $t2, 4
+  mult $t0, $t2
+  mflo $t3
+  add $t3, $t3, $t1
+  sll $t3, $t3, 2
+  addi $t3, $t3, -56
+  add $t3, $fp, $t3
+  lw $v0, 0($sp)
+  addi $sp, $sp, 4
+  sw $v0, 0($t3)
+  li $v0, 104
+  sw $v0, -4($sp)
+  addi $sp, $sp, -4
+  li $v0, 1
+  add $t0, $v0, $zero
+  li $v0, 0
+  add $t1, $v0, $zero
+  li $t2, 4
+  mult $t0, $t2
+  mflo $t3
+  add $t3, $t3, $t1
+  sll $t3, $t3, 2
+  addi $t3, $t3, -56
+  add $t3, $fp, $t3
+  lw $v0, 0($sp)
+  addi $sp, $sp, 4
+  sw $v0, 0($t3)
+  li $v0, 105
+  sw $v0, -4($sp)
+  addi $sp, $sp, -4
+  li $v0, 1
+  add $t0, $v0, $zero
+  li $v0, 1
+  add $t1, $v0, $zero
+  li $t2, 4
+  mult $t0, $t2
+  mflo $t3
+  add $t3, $t3, $t1
+  sll $t3, $t3, 2
+  addi $t3, $t3, -56
+  add $t3, $fp, $t3
+  lw $v0, 0($sp)
+  addi $sp, $sp, 4
+  sw $v0, 0($t3)
+  li $v0, 106
+  sw $v0, -4($sp)
+  addi $sp, $sp, -4
+  li $v0, 1
+  add $t0, $v0, $zero
+  li $v0, 2
+  add $t1, $v0, $zero
+  li $t2, 4
+  mult $t0, $t2
+  mflo $t3
+  add $t3, $t3, $t1
+  sll $t3, $t3, 2
+  addi $t3, $t3, -56
+  add $t3, $fp, $t3
+  lw $v0, 0($sp)
+  addi $sp, $sp, 4
+  sw $v0, 0($t3)
+  li $v0, 107
+  sw $v0, -4($sp)
+  addi $sp, $sp, -4
+  li $v0, 1
+  add $t0, $v0, $zero
+  li $v0, 3
+  add $t1, $v0, $zero
   li $t2, 4
   mult $t0, $t2
   mflo $t3
@@ -108,9 +159,9 @@ main:
   addi $sp, $sp, 4
   sw $v0, 0($t3)
   li $v0, 1
-  move $t0, $v0
-  li $v0, 0
-  move $t1, $v0
+  add $t0, $v0, $zero
+  li $v0, 1
+  add $t1, $v0, $zero
   li $t2, 4
   mult $t0, $t2
   mflo $t3

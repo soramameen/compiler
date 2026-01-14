@@ -8,7 +8,7 @@ init:
   la $sp, INITIAL_SP
   jal main
   nop
-  add $t0, $v0, $zero
+  add $a0, $v0, $zero
   li $v0, stop_service
   syscall
   nop
@@ -23,6 +23,9 @@ main:
   sw $fp, 28($sp)
   addiu $fp, $sp, 36
   li $v0, 10
+  sw $v0, -12($fp)
+  lw $v0, -12($fp)
+  nop
   sw $v0, -4($sp)
   addi $sp, $sp, -4
   li $v0, 0
@@ -32,7 +35,14 @@ main:
   addi $sp, $sp, 4
   add $t0, $fp, $v0
   sw $v1, 0($t0)
-  li $v0, 20
+  li $v0, 5
+  sw $v0, -4($sp)
+  addi $sp, $sp, -4
+  lw $v0, -12($fp)
+  nop
+  lw $v1, 0($sp)
+  addi $sp, $sp, 4
+  add $v0, $v0, $v1
   sw $v0, -4($sp)
   addi $sp, $sp, -4
   li $v0, 1
@@ -42,41 +52,14 @@ main:
   addi $sp, $sp, 4
   add $t0, $fp, $v0
   sw $v1, 0($t0)
-  li $v0, 30
-  sw $v0, -4($sp)
-  addi $sp, $sp, -4
-  li $v0, 2
-  sll $v0, $v0, 2
-  addi $v0, $v0, -28
-  lw $v1, 0($sp)
-  addi $sp, $sp, 4
-  add $t0, $fp, $v0
-  sw $v1, 0($t0)
-  li $v0, 40
-  sw $v0, -4($sp)
-  addi $sp, $sp, -4
-  li $v0, 3
-  sll $v0, $v0, 2
-  addi $v0, $v0, -28
-  lw $v1, 0($sp)
-  addi $sp, $sp, 4
-  add $t0, $fp, $v0
-  sw $v1, 0($t0)
-  li $v0, 50
-  sw $v0, -4($sp)
-  addi $sp, $sp, -4
-  li $v0, 4
-  sll $v0, $v0, 2
-  addi $v0, $v0, -28
-  lw $v1, 0($sp)
-  addi $sp, $sp, 4
-  add $t0, $fp, $v0
-  sw $v1, 0($t0)
-  li $v0, 0
+  li $v0, 1
   sll $v0, $v0, 2
   addi $v0, $v0, -28
   add $t0, $fp, $v0
   lw $v0, 0($t0)
+  nop
+  sw $v0, -16($fp)
+  lw $v0, -16($fp)
   nop
   lw $ra, 32($sp)
   nop

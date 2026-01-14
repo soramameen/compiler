@@ -176,6 +176,32 @@ static void walk_ast(Node *n, FILE *fp) {
              fprintf(fp,"   sltiu $v0, $v0, 1\n");
              break;
 
+        /* a <= b true->1, false->0 */
+        case LE_AST:
+             walk_ast(n->child->brother, fp);
+             push("$v0",fp);
+             walk_ast(n->child, fp);
+             pop("$v1",fp);
+             // v0 = a, v1 = b
+             // check if a <= b, which is same as !(a > b), which is same as !(b < a)
+             fprintf(fp,"   slt $t0, $v1, $v0\n");
+             nop(fp);
+             fprintf(fp,"   xori $v0, $t0, 1\n");
+             break;
+
+        /* a >= b true->1, false->0 */
+        case GE_AST:
+             walk_ast(n->child->brother, fp);
+             push("$v0",fp);
+             walk_ast(n->child, fp);
+             pop("$v1",fp);
+             // v0 = a, v1 = b
+             // check if a >= b, which is same as !(a < b)
+             fprintf(fp,"   slt $t0, $v0, $v1\n");
+             nop(fp);
+             fprintf(fp,"   xori $v0, $t0, 1\n");
+             break;
+
         case ARRAY_ACCESS_AST:
             if (n->child->brother->brother != NULL &&
                 n->child->brother->brother->brother != NULL) {

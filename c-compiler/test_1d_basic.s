@@ -8,7 +8,7 @@ init:
   la $sp, INITIAL_SP
   jal main
   nop
-  add $t0, $v0, $zero
+  add $a0, $v0, $zero
   li $v0, stop_service
   syscall
   nop
