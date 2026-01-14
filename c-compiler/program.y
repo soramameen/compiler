@@ -60,9 +60,9 @@ statement
 assignment_stmt /* 代入文 */
     : IDENT ASSIGN expression SEMIC {$$ =build_node2(ASSIGNMENT_STMT_AST,build_ident_node($1),$3);}
     | IDENT L_BRACKET expression R_BRACKET ASSIGN expression SEMIC {$$ = build_node3(ARRAY_ACCESS_AST, build_ident_node($1), $3, $6);} /* ex) arr[1] = 2; */
-    | IDENT L_BRACKET expression R_BRACKET L_BRACKET expression R_BRACKET ASSIGN expression SEMIC {$$ = build_node4(ARRAY_ACCESS_AST, build_ident_node($1), $3, $6, $9);} /* ex)arr[1][2] = 2;
+    | IDENT L_BRACKET expression R_BRACKET L_BRACKET expression R_BRACKET ASSIGN expression SEMIC {$$ = build_node4(ARRAY_ACCESS_AST, build_ident_node($1), $3, $6, $9);} /* ex)arr[1][2] = 2; */
 
-;
+ ;
 
 expression /* 算術式 */
     : expression add_op term {

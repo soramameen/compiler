@@ -156,7 +156,7 @@ static void walk_ast(Node *n, FILE *fp) {
             fprintf(fp,"  div $v0, $v1\n");
             fprintf(fp,"  mflo $v0\n");
              break;
-        /* a < b true->1, false->0 */ 
+        /* a < b true->1, false->0 */
           case LT_AST:
              walk_ast(n->child->brother, fp);
              push("$v0",fp);
@@ -165,7 +165,7 @@ static void walk_ast(Node *n, FILE *fp) {
              fprintf(fp,"   slt $v0, $v0, $v1\n");
              break;
 
-        /* a == b true->1, false->0 */ 
+        /* a == b true->1, false->0 */
         case EQ_AST:
              walk_ast(n->child->brother, fp);
              push("$v0",fp);
@@ -176,6 +176,97 @@ static void walk_ast(Node *n, FILE *fp) {
              fprintf(fp,"   sltiu $v0, $v0, 1\n");
              break;
 
+        case ARRAY_ACCESS_AST:
+            if (n->child->brother->brother != NULL &&
+                n->child->brother->brother->brother != NULL) {
+                // 2次元配列の代入: arr[i][j] = value;
+                char* arr_name = n->child->val.sval;
+                int base_offset = symbol_table_get_address(arr_name);
+                int cols = symbol_table_get_array_cols(arr_name);
+
+                // 値を保存
+                walk_ast(n->child->brother->brother->brother, fp);
+                push("$v0", fp);
+
+                // row (i) を計算
+                walk_ast(n->child->brother, fp);
+                fprintf(fp, "  add $t0, $v0, $zero\n");
+
+                // col (j) を計算
+                walk_ast(n->child->brother->brother, fp);
+                fprintf(fp, "  add $t1, $v0, $zero\n");
+
+                // index = i * cols + j
+                fprintf(fp, "  li $t2, %d\n", cols);
+                fprintf(fp, "  mult $t0, $t2\n");
+                fprintf(fp, "  mflo $t3\n");
+                fprintf(fp, "  add $t3, $t3, $t1\n");
+
+                // バイトオフセットに変換
+                fprintf(fp, "  sll $t3, $t3, 2\n");
+                fprintf(fp, "  addi $t3, $t3, %d\n", base_offset);
+                fprintf(fp, "  add $t3, $fp, $t3\n");
+
+                // 値を格納
+                pop("$v0", fp);
+                fprintf(fp, "  sw $v0, 0($t3)\n");
+            }
+            else if (n->child->brother->brother != NULL) {
+                char* arr_name = n->child->val.sval;
+                int cols = symbol_table_get_array_cols(arr_name);
+                if (cols > 0) {
+                    // 2次元配列の参照: x = arr[i][j];
+                    int base_offset = symbol_table_get_address(arr_name);
+
+                    walk_ast(n->child->brother, fp);
+                    fprintf(fp, "  add $t0, $v0, $zero\n");
+                    walk_ast(n->child->brother->brother, fp);
+                    fprintf(fp, "  add $t1, $v0, $zero\n");
+
+                    fprintf(fp, "  li $t2, %d\n", cols);
+                    fprintf(fp, "  mult $t0, $t2\n");
+                    fprintf(fp, "  mflo $t3\n");
+                    fprintf(fp, "  add $t3, $t3, $t1\n");
+                    fprintf(fp, "  sll $t3, $t3, 2\n");
+                    fprintf(fp, "  addi $t3, $t3, %d\n", base_offset);
+                    fprintf(fp, "  add $t3, $fp, $t3\n");
+                    fprintf(fp, "  lw $v0, 0($t3)\n");
+                    nop(fp);
+                } else {
+                    // 1次元配列の代入: arr[i] = value;
+                    int base_offset = symbol_table_get_address(arr_name);
+
+                    // 値を保存
+                    walk_ast(n->child->brother->brother, fp);
+                    push("$v0", fp);
+
+                    // アドレスを計算
+                    walk_ast(n->child->brother, fp);
+                    fprintf(fp, "  sll $v0, $v0, 2\n");
+                    fprintf(fp, "  addi $v0, $v0, %d\n", base_offset);
+
+                    // 値を格納
+                    pop("$v1", fp);
+                    fprintf(fp, "  add $t0, $fp, $v0\n");
+                    fprintf(fp, "  sw $v1, 0($t0)\n");
+                }
+            }
+            else {
+                // 1次元配列の参照: x = arr[i];
+                char* arr_name = n->child->val.sval;
+                int base_offset = symbol_table_get_address(arr_name);
+
+                walk_ast(n->child->brother, fp);
+                fprintf(fp, "  sll $v0, $v0, 2\n");
+                fprintf(fp, "  addi $v0, $v0, %d\n", base_offset);
+                fprintf(fp, "  add $t0, $fp, $v0\n");
+                fprintf(fp, "  lw $v0, 0($t0)\n");
+                nop(fp);
+            }
+            break;
+
+        case ARRAY_DECL_STATEMENT_AST:
+            break;
 
         case DECL_STATEMENT_AST:
              break;
@@ -208,7 +299,7 @@ void generate_code(Node *root, FILE *fp) {
     fprintf(fp, "  la $sp, INITIAL_SP\n");
     fprintf(fp, "  jal main\n");
     nop(fp);
-    fprintf(fp, "  add $t0, $v0, $zero\n");
+    fprintf(fp, "  add $a0, $v0, $zero\n");
     fprintf(fp, "  li $v0, stop_service\n");
     fprintf(fp, "  syscall\n");
     nop(fp);
