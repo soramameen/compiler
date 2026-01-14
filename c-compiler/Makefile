@@ -82,7 +82,7 @@ run_era: program
 	./program < tests/era.c > era.s && maps -e era.s
 
 run_2d: program
-	./pragram < tests/2d.c > 2d.s && maps -e 2d.s
+	./program < tests/2d.c > 2d.s && maps -e 2d.s
 run_le: program
 	./program < tests/test_le.c > test_le.s && maps -e test_le.s
 

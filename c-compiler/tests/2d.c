@@ -17,9 +17,9 @@ while(i<2){
     j=0;
     while(j<2){
         matrix3[i][j] = 0;
-        j++;
+        j = j+1;
     }
-    i++;
+    i = i+1;
 }
 i=0;
 while(i<2){
@@ -28,9 +28,9 @@ while(i<2){
         k=0;
         while(k<2){
             matrix3[i][j] = matrix3[i][j] + matrix1[i][k] * matrix2[k][j];
-            k++;
+            k = k+1;
         }
-        j++;
+        j = j+1;
     }
-    i++;
+    i = i +1;
 }
