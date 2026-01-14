@@ -12,6 +12,7 @@ typedef enum{
     ARRAY_DECL_STATEMENT_AST,
     DECL_STATEMENTS_AST,
     ASSIGNMENT_STMT_AST,
+    ARRAY_ACCESS_AST,
     STR_AST,
     NUMBER_AST,
     EXPRESSION_AST,
@@ -63,6 +64,7 @@ Node *build_node0(NType t);
 Node *build_node1(NType t, Node *p1);
 Node *build_node2(NType t, Node *p1, Node *p2);
 Node* build_node3(NType t, Node* p1, Node* p2, Node* p3);
+Node* build_node4(NType t, Node* p1, Node* p2, Node* p3, Node* p4);
 Node* build_num_node(int n);
 Node* build_ident_node(char* s);
 #endif

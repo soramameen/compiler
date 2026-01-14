@@ -47,6 +47,20 @@ Node* build_node3(NType t, Node* p1, Node* p2, Node* p3){
     return p;
 }
 
+Node* build_node4(NType t, Node* p1, Node* p2, Node* p3, Node* p4){
+    Node *p;
+    p = (Node *)malloc(sizeof(Node));
+    if (p== NULL){
+      yyerror("out of memory");
+    }
+    p->type = t;
+    p->child = p1;
+    p->child->brother = p2;
+    p->child->brother-> brother = p3;
+    p->child->brother-> brother-> brother = p4;
+    return p;
+}
+
 Node *build_num_node(int n) {
     Node* p = build_node0(NUMBER_AST);
     p->val.ival = n;
@@ -74,6 +88,7 @@ char *node_types[] = {
     "ARRAY_DECL_STATEMENT_AST",
     "DECL_STATEMENTS_AST",
     "ASSIGNMENT_STMT_AST",
+    "ARRAY_ACCESS_AST",
     "STR_AST",
     "NUMBER_AST",
     "EXPRESSION_AST",
