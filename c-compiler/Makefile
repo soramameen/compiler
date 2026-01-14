@@ -78,6 +78,10 @@ run_kaizyo: program
 run_fizzbuzz: program
 	./program < tests/fizzbuzz.c > fizzbuzz.s && maps -e fizzbuzz.s
 
+run_era: program
+	./program < tests/era.c > era.s && maps -e era.s
+
+
 .PHONY: all clean test test_codegen test_sum run_sum run_kaizyo check_fizzbuzz
 
 check_fizzbuzz: $(TARGET)
