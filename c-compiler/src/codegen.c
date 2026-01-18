@@ -38,7 +38,6 @@ static void find_declarations(Node* n){
     find_declarations(n->child);
     find_declarations(n->brother);
 }
-// ASTを再帰的に辿る関数のプロトタイプ宣言
 static void walk_ast(Node *n, FILE *fp);
 
 // ASTを辿ってコード生成する本体
@@ -165,6 +164,15 @@ static void walk_ast(Node *n, FILE *fp) {
              fprintf(fp,"   slt $v0, $v0, $v1\n");
              break;
 
+        /* a > b true->1, false->0 */
+        case GT_AST:
+             walk_ast(n->child->brother, fp);
+             push("$v0",fp);
+             walk_ast(n->child, fp);
+             pop("$v1",fp);
+             fprintf(fp,"   slt $v0, $v1, $v0\n");
+             break;
+
         /* a == b true->1, false->0 */
         case EQ_AST:
              walk_ast(n->child->brother, fp);
@@ -200,6 +208,17 @@ static void walk_ast(Node *n, FILE *fp) {
              fprintf(fp,"   slt $t0, $v0, $v1\n");
              nop(fp);
              fprintf(fp,"   xori $v0, $t0, 1\n");
+             break;
+
+        /* a != b true->1, false->0 */
+        case NE_AST:
+             walk_ast(n->child->brother, fp);
+             push("$v0",fp);
+             walk_ast(n->child, fp);
+             pop("$v1",fp);
+             fprintf(fp,"   sub $v0, $v0, $v1\n");
+             nop(fp);
+             fprintf(fp,"   sltu $v0, $zero, $v0\n");
              break;
 
         case ARRAY_ACCESS_AST:

@@ -1,10 +1,10 @@
 # Fdb version 4
-["dvipdf"] 1768735254.65702 "main.dvi" "main.pdf" "main" 1768735254.88879 0
-  "main.dvi" 1768735254.63785 4208 bca421c4fb920776c0b5a3c328ac82c5 "latex"
+["dvipdf"] 1768738814.39583 "main.dvi" "main.pdf" "main" 1768738814.61516 0
+  "main.dvi" 1768738814.37825 10492 a6ae48a573cb37ba997a20a9405bd604 "latex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["latex"] 1768735254.33365 "main.tex" "main.dvi" "main" 1768735254.88849 0
+["latex"] 1768738814.04369 "main.tex" "main.dvi" "main" 1768738814.61483 0
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
@@ -23,6 +23,7 @@
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmsy10.tfm" 1136768653 1124 6c73e740cf17375f03eec0ee63599741 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmsy6.tfm" 1136768653 1116 933a60c408fc0a863a92debe84b2d294 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmsy8.tfm" 1136768653 1120 8b7d695260f3cff42e636090a8002094 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmtt10.tfm" 1136768653 768 1321e9409b4137d6fb428ac9dc956269 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmtt8.tfm" 1136768653 768 d7b9a2629a0c353102ad947dc9221d49 ""
   "/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty" 1734129479 7984 7dbb9280f03c0a315425f1b4f35d43ee ""
   "/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty" 1572645307 1057 525c2192b5febbd8c1f662c9468335bb ""
@@ -51,8 +52,8 @@
   "/usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf" 1739380943 42148 61becc7c670cd061bb319c643c27fdd4 ""
   "/usr/local/texlive/2025/texmf-var/web2c/euptex/platex.fmt" 1745490905 3336942 a3317c1e63f0e2be3426922707177eb4 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "main.aux" 1768735254.63727 1960 ba32c63794547b7316b37470ba099378 "latex"
-  "main.tex" 1768735234.86696 4056 7cba0fd6b3a83a5484d3464a80c4dc0b ""
+  "main.aux" 1768738814.37358 2437 2c780b391761f3c73776f67b2718b604 "latex"
+  "main.tex" 1768738813.09695 8728 559be2663bfea2fee29b4310f9c423f5 ""
   (generated)
   "main.aux"
   "main.dvi"

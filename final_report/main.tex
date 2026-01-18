@@ -25,24 +25,194 @@
 %--------------------------------------------------------------------%
 \section{実験の概要と目的} \label{sec:abstract}
 \subsection{本実験の概要}
-この実験では、独自に定義した言語をソース言語として、アセンブリ言語を
-目的言語として変換するコンパイラを作成する。
-コンパイラ作成の際には、字句解析を行うプログラムを生成するものとしてflex、構文解析を行うプログラムを生成するものとしてbision、astとコード生成に関してはc言語でプログラムを作成する。
+この実験では，独自に定義した言語をソース言語として，アセンブリ言語を
+目的言語として変換するコンパイラを作成する．
+コンパイラ作成の際には，字句解析を行うプログラムを生成するものとしてflex，構文解析を行うプログラムを生成するものとしてbison，astとコード生成に関してはc言語でプログラムを作成する．
 
 \subsection{本実験の目的}
-3年間の総仕上げとしてある程度大きなプログラムを作成する。
-仕様を決め、プログラムを書き、データ構造を決め、アルゴリズムを考え、テストパターンを決め、デバックするなどの一連の流れを経験する。
+3年間の総仕上げとしてある程度大きなプログラムを作成する．
+仕様を決め，プログラムを書き，データ構造を決め，アルゴリズムを考え，テストパターンを決め，デバッグするなどの一連の流れを経験する．
 
 
 \section{言語の定義}
 
+本コンパイラが受理する言語の文法定義を以下に示す．
+これはBisonの構文規則からC言語アクションコードを取り除いたものである．
+
+\begin{Verbatim}[numbers=left, xleftmargin=10mm, numbersep=6pt,
+                 fontsize=\footnotesize, baselinestretch=0.9]
+program
+    : declarations statements
+;
+
+declarations
+    : decl_statement declarations
+    | decl_statement
+;
+
+decl_statement
+    : DEFINE IDENT SEMIC
+    | ARRAY IDENT L_BRACKET NUMBER R_BRACKET SEMIC
+    | ARRAY IDENT L_BRACKET NUMBER R_BRACKET L_BRACKET NUMBER R_BRACKET SEMIC
+;
+
+statements
+    : statement statements
+    | statement
+;
+
+statement
+    : assignment_stmt
+    | loop_stmt
+    | cond_stmt
+    | expression SEMIC
+;
+
+assignment_stmt
+    : IDENT ASSIGN expression SEMIC
+    | IDENT L_BRACKET expression R_BRACKET ASSIGN expression SEMIC
+    | IDENT L_BRACKET expression R_BRACKET L_BRACKET expression R_BRACKET ASSIGN expression SEMIC
+;
+
+expression
+    : expression add_op term
+    | term
+;
+
+term
+    : term mul_op factor
+    | factor
+;
+
+factor
+    : var
+    | NUMBER
+    | L_PAREN expression R_PAREN
+    | IDENT L_BRACKET expression R_BRACKET
+    | IDENT L_BRACKET expression R_BRACKET L_BRACKET expression R_BRACKET
+;
+
+add_op
+    : PLUS
+    | MINUS
+;
+
+mul_op
+    : MUL
+    | DIV
+;
+
+var
+    : IDENT
+;
+
+loop_stmt
+    : WHILE L_PAREN condition R_PAREN L_BRACE statements R_BRACE
+;
+
+cond_stmt
+    : IF L_PAREN condition R_PAREN L_BRACE statements R_BRACE ELSE L_BRACE statements R_BRACE
+    | IF L_PAREN condition R_PAREN L_BRACE statements R_BRACE
+;
+
+condition
+    : expression cond_op expression
+;
+
+cond_op
+    : EQ
+    | NE
+    | LE
+    | GE
+    | LT
+    | GT
+;
+\end{Verbatim}
+
 \section{受理されるプログラム例}
+
+本コンパイラで受理できるプログラムの例を示す．
+
+\subsection{基本演算とWhileループ}
+
+まず，基本的な演算と繰り返し処理の例として，1から10までの和を計算するプログラムを示す．
+
+\begin{Verbatim}[numbers=left, xleftmargin=10mm, numbersep=6pt,
+                 fontsize=\small, baselinestretch=0.9]
+define i;
+define sum;
+sum = 0;
+i = 1;
+while (i < 11) {
+  sum = sum + i;
+  i = i + 1;
+}
+sum;
+\end{Verbatim}
+
+このプログラムでは，変数\verb|i|を1から10まで1ずつ増やしながら，\verb|sum|に加算していくことで和を求めている．
+
+\subsection{条件分岐 (If-Else)}
+
+次に，条件分岐の例として，2つの数値の大小比較を行い，大きい方から小さい方を減算するプログラムを示す．
+
+\begin{Verbatim}[numbers=left, xleftmargin=10mm, numbersep=6pt,
+                 fontsize=\small, baselinestretch=0.9]
+define a;
+define b;
+a = 10;
+b = 5;
+if (a > b) {
+  a = a - b;
+} else {
+  a = a + b;
+}
+a;
+\end{Verbatim}
+
+このプログラムでは，\verb|if-else|文を使用して条件によって実行する処理を分岐している．本コンパイラでは，\verb|==|，\verb|!=|，\verb|<=|，\verb|>=|，\verb|<|，\verb|>|の比較演算子が利用可能である．
+
+\subsection{配列の使用}
+
+最後に，配列の例として，3行3列の2次元配列の対角成分の和を計算するプログラムを示す．
+
+\begin{Verbatim}[numbers=left, xleftmargin=10mm, numbersep=6pt,
+                 fontsize=\small, baselinestretch=0.9]
+array arr[3][3];
+define sum;
+define i;
+arr[0][0] = 1;
+arr[0][1] = 2;
+arr[0][2] = 3;
+arr[1][0] = 4;
+arr[1][1] = 5;
+arr[1][2] = 6;
+arr[2][0] = 7;
+arr[2][1] = 8;
+arr[2][2] = 9;
+sum = 0;
+i = 0;
+while (i < 3) {
+  sum = sum + arr[i][i];
+  i = i + 1;
+}
+sum;
+\end{Verbatim}
+
+このプログラムでは，2次元配列を宣言し，対角成分（\verb|arr[0][0]|，\verb|arr[1][1]|，\verb|arr[2][2]|）を\verb|while|ループを用いて順に足し合わせている．1次元配列と2次元配列の両方がサポートされている．
 
 \section{コード生成}
 % メモリの使い方
 % レジスタの使い方
+% 基本的には，引数はv0に格納．さらに必要になればまたメモリに格納を繰り返す実装とした．
 % 算術式のコード生成の方法
-% 工夫した点 変数の格納かな
+% どんな実装にしたっけ．(振り返り必要)
+% 他にも主要なif文, 条件文などは章立てて説明していきたい．
+\section{特に工夫した点: 変数の管理方法}
+% 他の学生はプログラム上にラベルとして埋め込む人が多かった中，スタックとしてメモリに格納することに決めた．
+% 変数名をキーとしてoffsetを取得するdictionary?にしたっけ(要確認)．
+% なぜこうしたかというと他の言語を勉強した際に，スコープごとにスタックに変数を格納していく形だったので，直感でこの形で進めることに決めた．
+% この実装については思い出すために質問で深ぼる必要あり．結構前に作ったため．
 
 \section{最終課題のプログラムと実行結果}
 
