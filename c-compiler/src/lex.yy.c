@@ -1,5 +1,6 @@
+#line 1 "src/lex.yy.c"
 
-#line 2 "lex.yy.c"
+#line 3 "src/lex.yy.c"
 
 #define  YY_INT_ALIGNED short int
 
@@ -474,14 +475,14 @@ int yy_flex_debug = 0;
 #define YY_MORE_ADJ 0
 #define YY_RESTORE_YY_MORE_OFFSET
 char *yytext;
-#line 1 "c_program.l"
-#line 2 "c_program.l"
+#line 1 "src/c_program.l"
+#line 2 "src/c_program.l"
 #include "program.tab.h"
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
-#line 483 "lex.yy.c"
-#line 484 "lex.yy.c"
+#line 484 "src/lex.yy.c"
+#line 485 "src/lex.yy.c"
 
 #define INITIAL 0
 
@@ -698,9 +699,9 @@ YY_DECL
 		}
 
 	{
-#line 8 "c_program.l"
+#line 8 "src/c_program.l"
 
-#line 703 "lex.yy.c"
+#line 704 "src/lex.yy.c"
 
 	while ( /*CONSTCOND*/1 )		/* loops until end-of-file is reached */
 		{
@@ -759,127 +760,127 @@ do_action:	/* This label is used only to access EOF actions. */
 
 case 1:
 YY_RULE_SETUP
-#line 9 "c_program.l"
+#line 9 "src/c_program.l"
 {return DEFINE;}
 	YY_BREAK
 case 2:
 YY_RULE_SETUP
-#line 11 "c_program.l"
+#line 11 "src/c_program.l"
 {return EQ;}
 	YY_BREAK
 case 3:
 YY_RULE_SETUP
-#line 12 "c_program.l"
+#line 12 "src/c_program.l"
 {return NE;}
 	YY_BREAK
 case 4:
 YY_RULE_SETUP
-#line 13 "c_program.l"
+#line 13 "src/c_program.l"
 {return LE;}
 	YY_BREAK
 case 5:
 YY_RULE_SETUP
-#line 14 "c_program.l"
+#line 14 "src/c_program.l"
 {return GE;}
 	YY_BREAK
 case 6:
 YY_RULE_SETUP
-#line 15 "c_program.l"
+#line 15 "src/c_program.l"
 {return LT;}
 	YY_BREAK
 case 7:
 YY_RULE_SETUP
-#line 16 "c_program.l"
+#line 16 "src/c_program.l"
 {return GT;}
 	YY_BREAK
 case 8:
 YY_RULE_SETUP
-#line 18 "c_program.l"
+#line 18 "src/c_program.l"
 {return PLUS;}
 	YY_BREAK
 case 9:
 YY_RULE_SETUP
-#line 19 "c_program.l"
+#line 19 "src/c_program.l"
 {return MINUS;}
 	YY_BREAK
 case 10:
 YY_RULE_SETUP
-#line 20 "c_program.l"
+#line 20 "src/c_program.l"
 {return MUL;}
 	YY_BREAK
 case 11:
 YY_RULE_SETUP
-#line 21 "c_program.l"
+#line 21 "src/c_program.l"
 {return DIV;}
 	YY_BREAK
 case 12:
 YY_RULE_SETUP
-#line 23 "c_program.l"
+#line 23 "src/c_program.l"
 {return ASSIGN;}
 	YY_BREAK
 case 13:
 YY_RULE_SETUP
-#line 24 "c_program.l"
+#line 24 "src/c_program.l"
 {return SEMIC;}
 	YY_BREAK
 case 14:
 YY_RULE_SETUP
-#line 26 "c_program.l"
+#line 26 "src/c_program.l"
 {return L_PAREN;}
 	YY_BREAK
 case 15:
 YY_RULE_SETUP
-#line 27 "c_program.l"
+#line 27 "src/c_program.l"
 {return R_PAREN;}
 	YY_BREAK
 case 16:
 YY_RULE_SETUP
-#line 28 "c_program.l"
+#line 28 "src/c_program.l"
 {return L_BRACKET;}
 	YY_BREAK
 case 17:
 YY_RULE_SETUP
-#line 29 "c_program.l"
+#line 29 "src/c_program.l"
 {return R_BRACKET;}
 	YY_BREAK
 case 18:
 YY_RULE_SETUP
-#line 30 "c_program.l"
+#line 30 "src/c_program.l"
 {return L_BRACE;}
 	YY_BREAK
 case 19:
 YY_RULE_SETUP
-#line 31 "c_program.l"
+#line 31 "src/c_program.l"
 {return R_BRACE;}
 	YY_BREAK
 case 20:
 YY_RULE_SETUP
-#line 33 "c_program.l"
+#line 33 "src/c_program.l"
 {return ARRAY;}
 	YY_BREAK
 case 21:
 YY_RULE_SETUP
-#line 34 "c_program.l"
+#line 34 "src/c_program.l"
 {return WHILE;}
 	YY_BREAK
 case 22:
 YY_RULE_SETUP
-#line 35 "c_program.l"
+#line 35 "src/c_program.l"
 {return FOR;}
 	YY_BREAK
 case 23:
 YY_RULE_SETUP
-#line 36 "c_program.l"
+#line 36 "src/c_program.l"
 {return IF;}
 	YY_BREAK
 case 24:
 YY_RULE_SETUP
-#line 37 "c_program.l"
+#line 37 "src/c_program.l"
 {return ELSE;}
 	YY_BREAK
 case 25:
 YY_RULE_SETUP
-#line 38 "c_program.l"
+#line 38 "src/c_program.l"
 {
   yylval.str = (char*)malloc(sizeof(char) * yyleng + 1);
   strncpy(yylval.str, yytext, yyleng);
@@ -889,26 +890,26 @@ YY_RULE_SETUP
 	YY_BREAK
 case 26:
 YY_RULE_SETUP
-#line 44 "c_program.l"
+#line 44 "src/c_program.l"
 {yylval.num = atoi(yytext); return NUMBER;}
 	YY_BREAK
 case 27:
 /* rule 27 can match eol */
 YY_RULE_SETUP
-#line 45 "c_program.l"
+#line 45 "src/c_program.l"
 {}
 	YY_BREAK
 case 28:
 YY_RULE_SETUP
-#line 46 "c_program.l"
+#line 46 "src/c_program.l"
 {return yytext[0];}
 	YY_BREAK
 case 29:
 YY_RULE_SETUP
-#line 48 "c_program.l"
+#line 48 "src/c_program.l"
 ECHO;
 	YY_BREAK
-#line 911 "lex.yy.c"
+#line 912 "src/lex.yy.c"
 case YY_STATE_EOF(INITIAL):
 	yyterminate();
 
@@ -1913,6 +1914,6 @@ void yyfree (void * ptr )
 
 #define YYTABLES_NAME "yytables"
 
-#line 48 "c_program.l"
+#line 48 "src/c_program.l"
 
 

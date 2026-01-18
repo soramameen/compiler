@@ -67,7 +67,7 @@
 
 
 /* First part of user prologue.  */
-#line 1 "program.y"
+#line 1 "src/program.y"
 
 #include <stdio.h>
 #include "ast.h"
@@ -77,7 +77,7 @@ extern int yylex();
 extern void yyerror(const char *s);
 extern Node* top;
 
-#line 81 "program.tab.c"
+#line 81 "src/program.tab.c"
 
 # ifndef YY_CAST
 #  ifdef __cplusplus
@@ -1434,97 +1434,97 @@ yyreduce:
   switch (yyn)
     {
   case 2: /* program: declarations statements  */
-#line 37 "program.y"
+#line 37 "src/program.y"
                               {top = build_node2(STATEMENTS_AST,(yyvsp[-1].np), (yyvsp[0].np));}
-#line 1440 "program.tab.c"
+#line 1440 "src/program.tab.c"
     break;
 
   case 3: /* declarations: decl_statement declarations  */
-#line 41 "program.y"
+#line 41 "src/program.y"
                                   { (yyval.np) = build_node2(DECL_STATEMENTS_AST,(yyvsp[-1].np), (yyvsp[0].np));}
-#line 1446 "program.tab.c"
+#line 1446 "src/program.tab.c"
     break;
 
   case 4: /* declarations: decl_statement  */
-#line 42 "program.y"
+#line 42 "src/program.y"
                      { (yyval.np) = build_node1(DECL_STATEMENTS_AST, (yyvsp[0].np));}
-#line 1452 "program.tab.c"
+#line 1452 "src/program.tab.c"
     break;
 
   case 5: /* decl_statement: DEFINE IDENT SEMIC  */
-#line 45 "program.y"
+#line 45 "src/program.y"
                          { (yyval.np) = build_node1(DECL_STATEMENT_AST, build_ident_node((yyvsp[-1].str)));}
-#line 1458 "program.tab.c"
+#line 1458 "src/program.tab.c"
     break;
 
   case 6: /* decl_statement: ARRAY IDENT L_BRACKET NUMBER R_BRACKET SEMIC  */
-#line 46 "program.y"
+#line 46 "src/program.y"
                                                    { (yyval.np) = build_node2(ARRAY_DECL_STATEMENT_AST, build_ident_node((yyvsp[-4].str)), build_num_node((yyvsp[-2].num)));}
-#line 1464 "program.tab.c"
+#line 1464 "src/program.tab.c"
     break;
 
   case 7: /* decl_statement: ARRAY IDENT L_BRACKET NUMBER R_BRACKET L_BRACKET NUMBER R_BRACKET SEMIC  */
-#line 47 "program.y"
+#line 47 "src/program.y"
                                                                               { (yyval.np) = build_node3(ARRAY_DECL_STATEMENT_AST, build_ident_node((yyvsp[-7].str)), build_num_node((yyvsp[-5].num)), build_num_node((yyvsp[-2].num)));}
-#line 1470 "program.tab.c"
+#line 1470 "src/program.tab.c"
     break;
 
   case 8: /* statements: statement statements  */
-#line 50 "program.y"
+#line 50 "src/program.y"
                            {(yyval.np) = build_node2(STATEMENTS_AST,(yyvsp[-1].np),(yyvsp[0].np));}
-#line 1476 "program.tab.c"
+#line 1476 "src/program.tab.c"
     break;
 
   case 9: /* statements: statement  */
-#line 51 "program.y"
+#line 51 "src/program.y"
                 {(yyval.np) = build_node1(STATEMENTS_AST,(yyvsp[0].np));}
-#line 1482 "program.tab.c"
+#line 1482 "src/program.tab.c"
     break;
 
   case 10: /* statement: assignment_stmt  */
-#line 54 "program.y"
+#line 54 "src/program.y"
                       {(yyval.np) = build_node1(STATEMENT_AST, (yyvsp[0].np));}
-#line 1488 "program.tab.c"
+#line 1488 "src/program.tab.c"
     break;
 
   case 11: /* statement: loop_stmt  */
-#line 55 "program.y"
+#line 55 "src/program.y"
                 { (yyval.np) = build_node1(STATEMENT_AST,(yyvsp[0].np));}
-#line 1494 "program.tab.c"
+#line 1494 "src/program.tab.c"
     break;
 
   case 12: /* statement: cond_stmt  */
-#line 56 "program.y"
+#line 56 "src/program.y"
                 { (yyval.np) = build_node1(STATEMENT_AST,(yyvsp[0].np));}
-#line 1500 "program.tab.c"
+#line 1500 "src/program.tab.c"
     break;
 
   case 13: /* statement: expression SEMIC  */
-#line 57 "program.y"
+#line 57 "src/program.y"
                        {(yyval.np) = build_node1(STATEMENT_AST, (yyvsp[-1].np));}
-#line 1506 "program.tab.c"
+#line 1506 "src/program.tab.c"
     break;
 
   case 14: /* assignment_stmt: IDENT ASSIGN expression SEMIC  */
-#line 61 "program.y"
+#line 61 "src/program.y"
                                     {(yyval.np) =build_node2(ASSIGNMENT_STMT_AST,build_ident_node((yyvsp[-3].str)),(yyvsp[-1].np));}
-#line 1512 "program.tab.c"
+#line 1512 "src/program.tab.c"
     break;
 
   case 15: /* assignment_stmt: IDENT L_BRACKET expression R_BRACKET ASSIGN expression SEMIC  */
-#line 62 "program.y"
+#line 62 "src/program.y"
                                                                    {(yyval.np) = build_node3(ARRAY_ACCESS_AST, build_ident_node((yyvsp[-6].str)), (yyvsp[-4].np), (yyvsp[-1].np));}
-#line 1518 "program.tab.c"
+#line 1518 "src/program.tab.c"
     break;
 
   case 16: /* assignment_stmt: IDENT L_BRACKET expression R_BRACKET L_BRACKET expression R_BRACKET ASSIGN expression SEMIC  */
-#line 63 "program.y"
+#line 63 "src/program.y"
                                                                                                   {(yyval.np) = build_node4(ARRAY_ACCESS_AST, build_ident_node((yyvsp[-9].str)), (yyvsp[-7].np), (yyvsp[-4].np), (yyvsp[-1].np));}
-#line 1524 "program.tab.c"
+#line 1524 "src/program.tab.c"
     break;
 
   case 17: /* expression: expression add_op term  */
-#line 68 "program.y"
+#line 68 "src/program.y"
                              {
           if ((yyvsp[-1].num) == OP_PLUS) {
               (yyval.np) = build_node2(PLUS_AST, (yyvsp[-2].np), (yyvsp[0].np));
@@ -1533,17 +1533,17 @@ yyreduce:
               (yyval.np) = build_node2(MINUS_AST, (yyvsp[-2].np), (yyvsp[0].np));
           }
       }
-#line 1537 "program.tab.c"
+#line 1537 "src/program.tab.c"
     break;
 
   case 18: /* expression: term  */
-#line 77 "program.y"
+#line 77 "src/program.y"
            {(yyval.np) = (yyvsp[0].np);}
-#line 1543 "program.tab.c"
+#line 1543 "src/program.tab.c"
     break;
 
   case 19: /* term: term mul_op factor  */
-#line 81 "program.y"
+#line 81 "src/program.y"
                          {
           if ((yyvsp[-1].num) == OP_MUL) {
               (yyval.np) = build_node2(MUL_AST, (yyvsp[-2].np), (yyvsp[0].np));
@@ -1552,95 +1552,95 @@ yyreduce:
               (yyval.np) = build_node2(DIV_AST, (yyvsp[-2].np), (yyvsp[0].np));
           }
       }
-#line 1556 "program.tab.c"
+#line 1556 "src/program.tab.c"
     break;
 
   case 20: /* term: factor  */
-#line 90 "program.y"
+#line 90 "src/program.y"
              {(yyval.np) = (yyvsp[0].np);}
-#line 1562 "program.tab.c"
+#line 1562 "src/program.tab.c"
     break;
 
   case 21: /* factor: var  */
-#line 94 "program.y"
+#line 94 "src/program.y"
           {(yyval.np) = (yyvsp[0].np);}
-#line 1568 "program.tab.c"
+#line 1568 "src/program.tab.c"
     break;
 
   case 22: /* factor: NUMBER  */
-#line 95 "program.y"
+#line 95 "src/program.y"
              {(yyval.np) = build_num_node((yyvsp[0].num));}
-#line 1574 "program.tab.c"
+#line 1574 "src/program.tab.c"
     break;
 
   case 23: /* factor: L_PAREN expression R_PAREN  */
-#line 96 "program.y"
+#line 96 "src/program.y"
                                  {(yyval.np) = (yyvsp[-1].np);}
-#line 1580 "program.tab.c"
+#line 1580 "src/program.tab.c"
     break;
 
   case 24: /* factor: IDENT L_BRACKET expression R_BRACKET  */
-#line 97 "program.y"
+#line 97 "src/program.y"
                                            {(yyval.np) = build_node2(ARRAY_ACCESS_AST, build_ident_node((yyvsp[-3].str)), (yyvsp[-1].np));}
-#line 1586 "program.tab.c"
+#line 1586 "src/program.tab.c"
     break;
 
   case 25: /* factor: IDENT L_BRACKET expression R_BRACKET L_BRACKET expression R_BRACKET  */
-#line 98 "program.y"
+#line 98 "src/program.y"
                                                                           {(yyval.np) = build_node3(ARRAY_ACCESS_AST, build_ident_node((yyvsp[-6].str)), (yyvsp[-4].np), (yyvsp[-1].np));}
-#line 1592 "program.tab.c"
+#line 1592 "src/program.tab.c"
     break;
 
   case 26: /* add_op: PLUS  */
-#line 102 "program.y"
+#line 102 "src/program.y"
            {(yyval.num) = OP_PLUS;}
-#line 1598 "program.tab.c"
+#line 1598 "src/program.tab.c"
     break;
 
   case 27: /* add_op: MINUS  */
-#line 103 "program.y"
+#line 103 "src/program.y"
             {(yyval.num) = OP_MINUS;}
-#line 1604 "program.tab.c"
+#line 1604 "src/program.tab.c"
     break;
 
   case 28: /* mul_op: MUL  */
-#line 107 "program.y"
+#line 107 "src/program.y"
           {(yyval.num) = OP_MUL;}
-#line 1610 "program.tab.c"
+#line 1610 "src/program.tab.c"
     break;
 
   case 29: /* mul_op: DIV  */
-#line 108 "program.y"
+#line 108 "src/program.y"
           {(yyval.num) = OP_DIV;}
-#line 1616 "program.tab.c"
+#line 1616 "src/program.tab.c"
     break;
 
   case 30: /* var: IDENT  */
-#line 112 "program.y"
+#line 112 "src/program.y"
             { (yyval.np) = build_node1(VAR_AST,build_ident_node((yyvsp[0].str)));}
-#line 1622 "program.tab.c"
+#line 1622 "src/program.tab.c"
     break;
 
   case 31: /* loop_stmt: WHILE L_PAREN condition R_PAREN L_BRACE statements R_BRACE  */
-#line 116 "program.y"
+#line 116 "src/program.y"
                                                                  { (yyval.np) = build_node2(WHILE_AST,(yyvsp[-4].np), (yyvsp[-1].np));}
-#line 1628 "program.tab.c"
+#line 1628 "src/program.tab.c"
     break;
 
   case 32: /* cond_stmt: IF L_PAREN condition R_PAREN L_BRACE statements R_BRACE ELSE L_BRACE statements R_BRACE  */
-#line 120 "program.y"
+#line 120 "src/program.y"
                                                                                               {(yyval.np) = build_node3(IF_AST, (yyvsp[-8].np), (yyvsp[-5].np), (yyvsp[-1].np));}
-#line 1634 "program.tab.c"
+#line 1634 "src/program.tab.c"
     break;
 
   case 33: /* cond_stmt: IF L_PAREN condition R_PAREN L_BRACE statements R_BRACE  */
-#line 121 "program.y"
+#line 121 "src/program.y"
                                                               {(yyval.np) =build_node2(IF_AST, (yyvsp[-4].np), (yyvsp[-1].np));}
-#line 1640 "program.tab.c"
+#line 1640 "src/program.tab.c"
     break;
 
   case 34: /* condition: expression cond_op expression  */
-#line 124 "program.y"
+#line 124 "src/program.y"
                                     {
       if ((yyvsp[-1].num) == OP_EQ) {
           (yyval.np) = build_node2(EQ_AST, (yyvsp[-2].np), (yyvsp[0].np));}
@@ -1655,47 +1655,47 @@ yyreduce:
       else if ((yyvsp[-1].num) == OP_GT) {
           (yyval.np) = build_node2(GT_AST, (yyvsp[-2].np), (yyvsp[0].np));}
     }
-#line 1659 "program.tab.c"
+#line 1659 "src/program.tab.c"
     break;
 
   case 35: /* cond_op: EQ  */
-#line 141 "program.y"
+#line 141 "src/program.y"
          { (yyval.num) = OP_EQ; }
-#line 1665 "program.tab.c"
+#line 1665 "src/program.tab.c"
     break;
 
   case 36: /* cond_op: NE  */
-#line 142 "program.y"
+#line 142 "src/program.y"
          { (yyval.num) = OP_NE; }
-#line 1671 "program.tab.c"
+#line 1671 "src/program.tab.c"
     break;
 
   case 37: /* cond_op: LE  */
-#line 143 "program.y"
+#line 143 "src/program.y"
          { (yyval.num) = OP_LE; }
-#line 1677 "program.tab.c"
+#line 1677 "src/program.tab.c"
     break;
 
   case 38: /* cond_op: GE  */
-#line 144 "program.y"
+#line 144 "src/program.y"
          { (yyval.num) = OP_GE; }
-#line 1683 "program.tab.c"
+#line 1683 "src/program.tab.c"
     break;
 
   case 39: /* cond_op: LT  */
-#line 145 "program.y"
+#line 145 "src/program.y"
          { (yyval.num) = OP_LT; }
-#line 1689 "program.tab.c"
+#line 1689 "src/program.tab.c"
     break;
 
   case 40: /* cond_op: GT  */
-#line 146 "program.y"
+#line 146 "src/program.y"
          { (yyval.num) = OP_GT; }
-#line 1695 "program.tab.c"
+#line 1695 "src/program.tab.c"
     break;
 
 
-#line 1699 "program.tab.c"
+#line 1699 "src/program.tab.c"
 
       default: break;
     }
@@ -1919,5 +1919,5 @@ yyreturnlab:
   return yyresult;
 }
 
-#line 151 "program.y"
+#line 151 "src/program.y"
 

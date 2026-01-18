@@ -1,10 +1,10 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.24)  7 JAN 2026 10:00
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.24)  18 JAN 2026 20:20
 entering extended mode
  restricted \write18 enabled.
  file:line:error style messages enabled.
  %&-line parsing enabled.
-**latex-template.tex
-(./latex-template.tex
+**main.tex
+(./main.tex
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
 L3 programming layer <2025-01-18>
@@ -124,8 +124,8 @@ File: l3backend-dvipdfmx.def 2024-05-08 L3 backend support: dvipdfmx
 \l__pdf_internal_box=\box71
 \g__pdf_backend_annotation_int=\count281
 \g__pdf_backend_link_int=\count282
-) (./latex-template.aux)
-\openout1 = `latex-template.aux'.
+) (./main.aux)
+\openout1 = `main.aux'.
 
 LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 20.
 LaTeX Font Info:    ... okay on input line 20.
@@ -206,32 +206,32 @@ LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 (Font)              scaled to size 13.8386pt on input line 26.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 11.53217pt on input line 40.
+(Font)              scaled to size 11.53217pt on input line 27.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 11.53217pt on input line 40.
+(Font)              scaled to size 11.53217pt on input line 27.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 9.61014pt on input line 42.
+(Font)              scaled to size 9.61014pt on input line 51.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 9.61014pt on input line 42.
+(Font)              scaled to size 9.61014pt on input line 51.
 LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
-(Font)              scaled to size 8.64912pt on input line 45.
+(Font)              scaled to size 8.64912pt on input line 54.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
-(Font)              scaled to size 8.64912pt on input line 45.
+(Font)              scaled to size 8.64912pt on input line 54.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 8.64912pt on input line 45.
+(Font)              scaled to size 8.64912pt on input line 54.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 8.64912pt on input line 45.
+(Font)              scaled to size 8.64912pt on input line 54.
 LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
-(Font)              scaled to size 7.68811pt on input line 46.
+(Font)              scaled to size 7.68811pt on input line 55.
 LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
-(Font)              scaled to size 7.68811pt on input line 46.
+(Font)              scaled to size 7.68811pt on input line 55.
 
 
 [1
 
 ]
 
-[2] (./latex-template.aux)
+[2] (./main.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
@@ -240,11 +240,11 @@ L3 programming layer <2025-01-18>
  ) 
 Here is how much of TeX's memory you used:
  3292 strings out of 473836
- 53114 string characters out of 5731189
- 455015 words of memory out of 5000000
+ 52994 string characters out of 5731189
+ 453991 words of memory out of 5000000
  26546 multiletter control sequences out of 15000+600000
  570513 words of font info for 92 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 61i,6n,65p,231b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 61i,6n,65p,221b,476s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on latex-template.dvi (2 pages, 3080 bytes).
+Output written on main.dvi (2 pages, 4208 bytes).

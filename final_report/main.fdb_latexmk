@@ -1,10 +1,10 @@
 # Fdb version 4
-["dvipdf"] 1767747637.81174 "latex-template.dvi" "latex-template.pdf" "latex-template" 1767747638.06127 0
-  "latex-template.dvi" 1767747637.80017 3080 0cbf73b6862acc5bd9260c154e074e09 "latex"
+["dvipdf"] 1768735254.65702 "main.dvi" "main.pdf" "main" 1768735254.88879 0
+  "main.dvi" 1768735254.63785 4208 bca421c4fb920776c0b5a3c328ac82c5 "latex"
   (generated)
-  "latex-template.pdf"
+  "main.pdf"
   (rewritten before read)
-["latex"] 1767747637.46897 "latex-template.tex" "latex-template.dvi" "latex-template" 1767747638.06097 0
+["latex"] 1768735254.33365 "main.tex" "main.dvi" "main" 1768735254.88849 0
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
@@ -51,10 +51,10 @@
   "/usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf" 1739380943 42148 61becc7c670cd061bb319c643c27fdd4 ""
   "/usr/local/texlive/2025/texmf-var/web2c/euptex/platex.fmt" 1745490905 3336942 a3317c1e63f0e2be3426922707177eb4 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "latex-template.aux" 1767747637.79741 1729 cc8f640727da3c59f7db9a40a77ae4e7 "latex"
-  "latex-template.tex" 1767747636.41585 3265 d42d0399b34ab00bda81446f1ab30dae ""
+  "main.aux" 1768735254.63727 1960 ba32c63794547b7316b37470ba099378 "latex"
+  "main.tex" 1768735234.86696 4056 7cba0fd6b3a83a5484d3464a80c4dc0b ""
   (generated)
-  "latex-template.aux"
-  "latex-template.dvi"
-  "latex-template.log"
+  "main.aux"
+  "main.dvi"
+  "main.log"
   (rewritten before read)
