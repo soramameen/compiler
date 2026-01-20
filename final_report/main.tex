@@ -286,8 +286,21 @@ while(i < 11) {
 }
 \end{Verbatim}
 
+
 \subsubsection{実行結果}
-% 実行結果とstep数
+
+シミュレータによる実行結果（主要部分）を以下に示す．
+
+\begin{Verbatim}[fontsize=\footnotesize]
+*** total inst. count:          347
+*** total cycle count:         1421
+***               IPC:   0.244 (inst/cycle)
+***               CPI:   4.095 (cycle/inst)
+\end{Verbatim}
+\begin{Verbatim}[fontsize=\footnotesize]
+7fffffe0: 0000000b 00000000 00000000 00000037
+7ffffff0: 0000000b 00000000 00000018 00000000
+\end{Verbatim}
 
 \subsection{5の階乗}
 
@@ -308,7 +321,19 @@ fact;
 \end{Verbatim}
 
 \subsubsection{実行結果}
-% 実行結果とstep数
+
+シミュレータによる実行結果（主要部分）を以下に示す．
+
+\begin{Verbatim}[fontsize=\footnotesize]
+*** total inst. count:          197
+*** total cycle count:          806
+***               IPC:   0.244 (inst/cycle)
+***               CPI:   4.091 (cycle/inst)
+\end{Verbatim}
+\begin{Verbatim}[fontsize=\footnotesize]
+7fffffe0: 00000006 00000000 00000000 00000078
+7ffffff0: 00000006 00000000 00000018 00000000
+\end{Verbatim}
 
 \subsection{FizzBuzz}
 
@@ -346,7 +371,139 @@ others;
 \end{Verbatim}
 
 \subsubsection{実行結果}
-% 実行結果とstep数
+
+シミュレータによる実行結果（主要部分）を以下に示す．
+
+\begin{Verbatim}[fontsize=\footnotesize]
+*** total inst. count:         3077
+*** total cycle count:        12577
+***               IPC:   0.245 (inst/cycle)
+***               CPI:   4.087 (cycle/inst)
+\end{Verbatim}
+\begin{Verbatim}[fontsize=\footnotesize]
+7fffffc0: 00000000 00000000 00000000 0000000f
+7fffffd0: 0000000f 0000001f 00000000 00000000
+7fffffe0: 0000001f 00000010 00000002 00000004
+7ffffff0: 00000008 00000000 00000018 00000000
+\end{Verbatim}
+
+
+\subsection{エラトステネス}
+
+\subsubsection{プログラム}
+
+\begin{Verbatim}[numbers=left, xleftmargin=10mm, numbersep=6pt,
+                 fontsize=\small, baselinestretch=0.8]
+define N;
+define i;
+define j;
+define k;
+array a[1001];
+N = 1000;
+i = 1;
+while (i <= N) {
+  a[i] = 1;
+  i = i + 1;
+}
+i = 2;
+while( i <= N/2) {
+  j = 2;
+  while(j <= N/i){
+    k = i * j;
+    a[k] = 0;
+    j = j + 1;
+  }
+  i = i + 1;
+}
+\end{Verbatim}
+
+
+\subsubsection{実行結果}
+
+シミュレータによる実行結果（主要部分）を以下に示す．
+
+\begin{Verbatim}[fontsize=\footnotesize]
+*** total inst. count:       335792
+*** total cycle count:      1389229
+***               IPC:   0.242 (inst/cycle)
+***               CPI:   4.137 (cycle/inst)
+\end{Verbatim}
+\begin{Verbatim}[fontsize=\footnotesize]
+7ffff030: 00000000 000001f4 00000000 00000000
+7ffff040: 00000000 00000001 00000001 00000001
+7ffff050: 00000000 00000001 00000000 00000001
+7ffff060: 00000000 00000000 00000000 00000001
+7ffff070: 00000000 00000001 00000000 00000000
+7ffff080: 00000000 00000001 00000000 00000001
+7ffff090: 00000000 00000000 00000000 00000001
+7ffff0b0: 00000000 00000001 00000000 00000001
+\end{Verbatim}
+
+
+\subsection{二次元配列}
+
+\subsubsection{プログラム}
+
+\begin{Verbatim}[numbers=left, xleftmargin=10mm, numbersep=6pt,
+                 fontsize=\small, baselinestretch=0.8]
+array matrix1[2][2];
+array matrix2[2][2];
+array matrix3[2][2];
+define i;
+define j;
+define k;
+matrix1[0][0] = 1;
+matrix1[0][1] = 2;
+matrix1[1][0] = 3;
+matrix1[1][1] = 4;
+matrix2[0][0] = 5;
+matrix2[0][1] = 6;
+matrix2[1][0] = 7;
+matrix2[1][1] = 8;
+i=0;
+while(i<2){
+    j=0;
+    while(j<2){
+        matrix3[i][j] = 0;
+        j = j+1;
+    }
+    i = i+1;
+}
+i=0;
+while(i<2){
+    j=0;
+    while(j<2){
+        k=0;
+        while(k<2){
+            matrix3[i][j] = matrix3[i][j] + matrix1[i][k] * matrix2[k][j];
+            k = k+1;
+        }
+        j = j+1;
+    }
+    i = i +1;
+}
+\end{Verbatim}
+
+
+\subsubsection{実行結果}
+
+シミュレータによる実行結果（主要部分）を以下に示す．
+
+\begin{Verbatim}[fontsize=\footnotesize]
+*** total inst. count:         1365
+*** total cycle count:         5594
+***               IPC:   0.244 (inst/cycle)
+***               CPI:   4.098 (cycle/inst)
+\end{Verbatim}
+\begin{Verbatim}[fontsize=\footnotesize]
+7fffffa0: 00000000 00000000 00000000 00000002
+7fffffb0: 00000000 00000000 00000002 00000002
+7fffffc0: 00000002 00000013 00000016 0000002b
+7fffffd0: 00000032 00000005 00000006 00000007
+7fffffe0: 00000008 00000001 00000002 00000003
+7ffffff0: 00000004 00000000 00000018 00000000
+\end{Verbatim}
+
 
 \section{考察}
 % レポート書いていく中で難しかった部分をメモしておいて考察とする．
@@ -401,13 +558,9 @@ others;
 
 \subsubsection{遅延分岐スロットの対処}
 MIPS特有の遅延分岐（Delay Slot）に対し，本実装では一律 \verb|nop| を挿入する安全策をとった．
-\verb|FizzBuzz| プログラムの実行結果（30,777命令）を見ると，その相当数が \verb|nop| であると推測される．
+\verb|FizzBuzz| プログラムの実行結果（3,077命令）を見ると，その相当数が \verb|nop| であると推測される．
 商用コンパイラでは，このスロットに「分岐の直前の命令」や「分岐先でも分岐しなくても無害な命令」を移動させる「遅延スロット・スケジューリング」が行われる．
 本コンパイラでも，単純な \verb|nop| 挿入ではなく，直前の計算命令をスロットに移動させる最適化を実装すれば，命令数をさらに数\%〜10\%程度削減できる余地があると考えられる．
-
-% Fizzbuzzがおかしいのでみてみる必要あり。
-% 実行結果のところから書く。
-% レポートの要件から必要なものを全て書いているかチェックする。
 
 % \begin{thebibliography}{99}
 %  \bibitem{book:algodata} 平田富雄，アルゴリズムとデータ構造，森北出版，1990.
