@@ -1,7 +1,6 @@
-This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.24)  18 JAN 2026 21:20
+This is e-upTeX, Version 3.141592653-p4.1.2-u2.00-250202-2.6 (utf8.euc) (TeX Live 2025) (preloaded format=platex 2025.4.24)  27 JAN 2026 20:21
 entering extended mode
  restricted \write18 enabled.
- file:line:error style messages enabled.
  %&-line parsing enabled.
 **main.tex
 (./main.tex
@@ -22,12 +21,15 @@ LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
 \calc@Ccount=\count197
 \calc@Cskip=\skip51
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/keyval.sty
 Package: keyval 2022/05/29 v1.15 key=value parser (DPC)
 \KV@toks@=\toks18
-) (/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
+)
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/iftex.sty
 Package: iftex 2024/12/12 v1.0g TeX engine tests
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/bxjscls/bxjscompat.sty
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/bxjscls/bxjscompat.sty
 Package: bxjscompat 2024/07/19 v2.9c BXJS document classes
 )
 \jsc@mpt=\dimen159
@@ -35,9 +37,11 @@ Package: bxjscompat 2024/07/19 v2.9c BXJS document classes
 \jsZw=\dimen161
 \jsc@smallskipamount=\skip52
 \fullwidth=\dimen162
- (/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/geometry/geometry.sty
 Package: geometry 2020/01/02 v5.9 Page Geometry
- (/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
+
+(/usr/local/texlive/2025/texmf-dist/tex/generic/iftex/ifvtex.sty
 Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 )
 \Gm@cnth=\count198
@@ -67,14 +71,18 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \jsc@tocl@width=\dimen171
 \@lnumwidth=\dimen172
 \bibindent=\dimen173
- (/usr/local/texlive/2025/texmf-dist/tex/latex/bxwareki/bxwareki.sty
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/bxwareki/bxwareki.sty
 Package: bxwareki 2023/07/07 v0.7
 \c@warekiyear=\count275
- (/usr/local/texlive/2025/texmf-dist/tex/latex/bxwareki/bxwareki-cd.def
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/bxwareki/bxwareki-cd.def
 File: bxwareki-cd.def 2023/07/07 v0.7
-)) (/usr/local/texlive/2025/texmf-dist/tex/latex/bxjscls/bxjsja-standard.def
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/bxjscls/bxjsja-standard.def
 File: bxjsja-standard.def 2024/07/19 v2.9c BXJS document classes
- (/usr/local/texlive/2025/texmf-dist/tex/latex/bxjscls/bxjsja-minimal.def
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/bxjscls/bxjsja-minimal.def
 File: bxjsja-minimal.def 2024/07/19 v2.9c BXJS document classes
 LaTeX Info: Redefining \textmc on input line 249.
 LaTeX Info: Redefining \textgt on input line 250.
@@ -82,10 +90,12 @@ LaTeX Font Info:    Font shape `JT1/mc/m/n' will be
 (Font)              scaled to size 9.61014pt on input line 254.
 LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
 (Font)              scaled to size 9.61014pt on input line 254.
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2025/02/11 v2.5l e-TeX tools for LaTeX (JAW)
 \etb@tempcnta=\count276
-) (/usr/local/texlive/2025/texmf-dist/tex/platex/pxjahyper/pxjahyper-enc.sty
+)
+(/usr/local/texlive/2025/texmf-dist/tex/platex/pxjahyper/pxjahyper-enc.sty
 Package: pxjahyper-enc 2024/08/25 v1.5
 )
 \symmincho=\mathgroup4
@@ -93,22 +103,28 @@ LaTeX Font Info:    Overwriting symbol font `mincho' in version `bold'
 (Font)                  JY1/mc/m/n --> JY1/gt/m/n on input line 392.
 LaTeX Info: Redefining \textmc on input line 683.
 LaTeX Info: Redefining \textgt on input line 684.
-)) (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
+))
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2021/09/16 v1.2d Enhanced LaTeX Graphics (DPC,SPQR)
- (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/graphics.sty
 Package: graphics 2024/08/06 v1.4g Standard LaTeX Graphics (DPC,SPQR)
- (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics/trig.sty
 Package: trig 2023/12/02 v1.11 sin cos tan (DPC)
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-cfg/graphics.cfg
 File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: dvipdfmx.def on input line 106.
- (/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/dvipdfmx.def
+
+(/usr/local/texlive/2025/texmf-dist/tex/latex/graphics-def/dvipdfmx.def
 File: dvipdfmx.def 2022/09/22 v5.0m Graphics/color driver for dvipdfmx
 ))
 \Gin@req@height=\dimen174
 \Gin@req@width=\dimen175
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
 Package: fancyvrb 2024/01/20 4.5c verbatim text (tvz,hv)
 \FV@CodeLineNo=\count277
 \FV@InFile=\read2
@@ -116,9 +132,11 @@ Package: fancyvrb 2024/01/20 4.5c verbatim text (tvz,hv)
 \c@FancyVerbLine=\count278
 \FV@StepNumber=\count279
 \FV@OutFile=\write3
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/spverbatim/spverbatim.sty
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/spverbatim/spverbatim.sty
 Package: spverbatim 2009/08/10 v1.0 Verbatim with breakable spaces
-) (/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-dvipdfmx.def
+)
+(/usr/local/texlive/2025/texmf-dist/tex/latex/l3backend/l3backend-dvipdfmx.def
 File: l3backend-dvipdfmx.def 2024-05-08 L3 backend support: dvipdfmx
 \g__graphics_track_int=\count280
 \l__pdf_internal_box=\box71
@@ -239,8 +257,37 @@ LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
 [3]
 
 [4]
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <7> on input line 249.
+LaTeX Font Info:    External font `cmex10' loaded for size
+(Font)              <5> on input line 249.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 6.7271pt on input line 249.
+LaTeX Font Info:    Font shape `JY1/mc/m/n' will be
+(Font)              scaled to size 4.80507pt on input line 249.
+LaTeX Font Info:    Font shape `JT1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JT1/gt/m/n' tried instead on input line 263.
+LaTeX Font Info:    Font shape `JT1/gt/m/n' will be
+(Font)              scaled to size 9.61014pt on input line 263.
+LaTeX Font Info:    Font shape `JY1/mc/bx/n' in size <10> not available
+(Font)              Font shape `JY1/gt/m/n' tried instead on input line 263.
+LaTeX Font Info:    Font shape `JY1/gt/m/n' will be
+(Font)              scaled to size 9.61014pt on input line 263.
 
-[5] (./main.aux)
+
+[5]
+
+[6]
+
+[7]
+
+[8]
+
+[9]
+
+[10]
+
+[11] (./main.aux)
  ***********
 pLaTeX2e <2023-02-14>+1, based on
 LaTeX2e <2024-11-01> patch level 2
@@ -248,12 +295,12 @@ L3 programming layer <2025-01-18>
  ***********
  ) 
 Here is how much of TeX's memory you used:
- 3295 strings out of 473836
- 53027 string characters out of 5731189
- 456991 words of memory out of 5000000
- 26548 multiletter control sequences out of 15000+600000
- 570870 words of font info for 94 fonts, out of 8000000 for 9000
+ 3316 strings out of 473836
+ 53434 string characters out of 5731189
+ 457016 words of memory out of 5000000
+ 26566 multiletter control sequences out of 15000+600000
+ 571994 words of font info for 99 fonts, out of 8000000 for 9000
  934 hyphenation exceptions out of 8191
- 61i,6n,65p,240b,482s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 61i,8n,65p,345b,482s stack positions out of 10000i,1000n,20000p,200000b,200000s
 
-Output written on main.dvi (5 pages, 10492 bytes).
+Output written on main.dvi (11 pages, 34500 bytes).

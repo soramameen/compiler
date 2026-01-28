@@ -246,7 +246,7 @@ MIPSの \texttt{beq \$v0, \$zero, LABEL} 命令を用いて表現した．
 
 特に2次元配列（\texttt{array[i][j]}）の実装では，行優先（Row-Major）配置を前提とし，
 シンボルテーブルに配列の列数（cols）を記録する設計とした．
-アクセス時には，\texttt{address = base + (i * cols + j) * 4} という計算式をアセンブリ命令として展開し，
+アクセス時には，$ \texttt{address} = \texttt{base} + (i \times \texttt{cols} + j) \times 4 $ という計算式をアセンブリ命令として展開し，
 動的なインデックスに対しても正しいアドレス計算を実現している．
 
 \section{特に工夫した点}
@@ -267,6 +267,21 @@ MIPSの関数呼び出し規約では，関数の先頭で必要なスタック�
 最初は変数が見つかるたびにスタックを拡張する方法も考えたが，オフセット計算が複雑になりバグの原因となったため，
 この「静的領域を先に確定させる」方式に切り替えた．
 結果として，メモリ管理が非常にシンプルかつ堅牢になり，バグを大幅に減らすことができた．
+
+\subsection{コンパイラのソースプログラム}
+
+本コンパイラのソースコードは以下のディレクトリに配置されている．
+
+\begin{Verbatim}[fontsize=\small]
+c-compiler/
+├── src/
+│   ├── codegen.c        # コード生成
+│   ├── program.y        # Bison構文規則
+│   ├── program.l        # Flex字句規則
+│   ├── symbol_table.c   # シンボルテーブル
+│   └── ...
+└── Makefile
+\end{Verbatim}
 
 \section{最終課題のプログラムと実行結果}
 
@@ -302,6 +317,9 @@ while(i < 11) {
 7ffffff0: 0000000b 00000000 00000018 00000000
 \end{Verbatim}
 
+メモリダンプより，\texttt{sum} はアドレス \texttt{0x7fffffec} に格納され，値は \textbf{0x37}（10進数で \textbf{55}）であることが確認できる．
+これは $1 + 2 + \cdots + 10 = 55$ という正しい計算結果と一致している．
+
 \subsection{5の階乗}
 
 \subsubsection{プログラム}
@@ -334,6 +352,9 @@ fact;
 7fffffe0: 00000006 00000000 00000000 00000078
 7ffffff0: 00000006 00000000 00000018 00000000
 \end{Verbatim}
+
+メモリダンプより，\texttt{fact} はアドレス \texttt{0x7fffffec} に格納され，値は \textbf{0x78}（10進数で \textbf{120}）であることが確認できる．
+これは $1 \times 2 \times 3 \times 4 \times 5 = 120$ という正しい計算結果と一致している．
 
 \subsection{FizzBuzz}
 
@@ -387,6 +408,12 @@ others;
 7ffffff0: 00000008 00000000 00000018 00000000
 \end{Verbatim}
 
+メモリダンプより，各カウンタの値を確認できる．
+\texttt{fizzbuzz}（3 と 5 両方で割り切れる）は \textbf{0x02}（2個），\texttt{fizz}（3 で割り切れる）は \textbf{0x08}（8個），
+\texttt{buzz}（5 で割り切れる）は \textbf{0x04}（4個），\texttt{others}（いずれでも割り切れない）は \textbf{0x10}（16個）となっていることが読み取れる．
+プログラムの最後で \texttt{others} の値 \textbf{0x10}（16個）が出力されており，
+$2 + 8 + 4 + 16 = 30$ となり，ループ回数と一致しているため正しい実行結果であると言える．
+
 
 \subsection{エラトステネス}
 
@@ -438,6 +465,13 @@ while( i <= N/2) {
 7ffff090: 00000000 00000000 00000000 00000001
 7ffff0b0: 00000000 00000001 00000000 00000001
 \end{Verbatim}
+
+メモリダンプより，配列 \texttt{a} の素数フラグを確認できる．
+最初の行には \texttt{N} = \textbf{0x1f4}（1000）が格納されている．
+配列 \texttt{a[1]} 〜 \texttt{a[16]} の値を見ると，
+\texttt{1}（素数フラグ）の位置は \texttt{a[2]}，\texttt{a[3]}，\texttt{a[5]}，\texttt{a[7]}，\texttt{a[11]}，\texttt{a[13]} であり，
+これは実際に素数である 2, 3, 5, 7, 11, 13 に対応していることが確認できる．
+エラトステネスの篩アルゴリズムが正しく実装されていることが分かる．
 
 
 \subsection{二次元配列}
@@ -504,9 +538,42 @@ while(i<2){
 7ffffff0: 00000004 00000000 00000018 00000000
 \end{Verbatim}
 
+メモリダンプより，行列 \texttt{matrix3} の計算結果を確認できる．
+\texttt{matrix3[0][0]} = \textbf{0x13}（19），\texttt{matrix3[0][1]} = \textbf{0x16}（22），
+\texttt{matrix3[1][0]} = \textbf{0x2b}（43），\texttt{matrix3[1][1]} = \textbf{0x32}（50）となっている．
+これらは以下の行列積の計算結果と正しく一致している．
+\[
+\left[
+\begin{array}{cc}
+1 & 2 \\
+3 & 4
+\end{array}
+\right]
+\times
+\left[
+\begin{array}{cc}
+5 & 6 \\
+7 & 8
+\end{array}
+\right]
+=
+\left[
+\begin{array}{cc}
+1 \times 5 + 2 \times 7 & 1 \times 6 + 2 \times 8 \\
+3 \times 5 + 4 \times 7 & 3 \times 6 + 4 \times 8
+\end{array}
+\right]
+=
+\left[
+\begin{array}{cc}
+19 & 22 \\
+43 & 50
+\end{array}
+\right]
+\]
+
 
 \section{考察}
-% レポート書いていく中で難しかった部分をメモしておいて考察とする．
 
 本実験におけるコード生成の実装と性能，そしてその工夫点について，定量的なデータと実験を用いて以下の通り考察する．
 

@@ -10,6 +10,23 @@ It is an educational project using Flex (lexical analysis) and Bison (parsing).
 This is an educational/learning project. **DO NOT make any changes to the code without explicit user instruction.**
 Your role is to assist, answer questions, and explain concepts. Never modify code, add features, or fix issues unless specifically asked.
 
+## Directory Structure
+The project root is `/Users/nakajimasoraera/dev/github.com/soramameen/compiler`.
+The main compiler code is in `c-compiler/`.
+
+```text
+c-compiler/
+├── src/                # Source code (codegen.c, program.y, etc.)
+├── tests/
+│   └── cases/          # Integration test cases (*.c)
+│       ├── sum.c       # Sum 1..10
+│       ├── kaizyo.c    # Factorial
+│       ├── fizzbuzz.c  # FizzBuzz
+│       └── ...
+├── output/             # Output assembly files (*.s)
+└── Makefile            # Build configuration
+```
+
 ## Build & Test Commands
 
 Most operations should be performed within the `c-compiler/` directory.

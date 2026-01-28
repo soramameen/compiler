@@ -1,15 +1,18 @@
 # Fdb version 4
-["dvipdf"] 1768738814.39583 "main.dvi" "main.pdf" "main" 1768738814.61516 0
-  "main.dvi" 1768738814.37825 10492 a6ae48a573cb37ba997a20a9405bd604 "latex"
+["dvipdf"] 1769512876.6194 "main.dvi" "main.pdf" "main" 1769512876.88585 0
+  "main.dvi" 1769512876.60077 34500 a07ebe7c687c55ab18c1e8d058878f80 "latex"
   (generated)
   "main.pdf"
   (rewritten before read)
-["latex"] 1768738814.04369 "main.tex" "main.dvi" "main" 1768738814.61483 0
+["latex"] 1769512876.17996 "main.tex" "main.dvi" "main" 1769512876.8855 0
   "/usr/local/texlive/2025/texmf-dist/fonts/map/fontname/texfonts.map" 1577235249 3524 cb3e574dea2d1052e39280babc910dc8 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tcrm1000.tfm" 1136768653 1536 e07581a4bb3136ece9eeb4c3ffab8233 ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/tfm/jknappen/ec/tctt1000.tfm" 1136768653 1536 c5729d01ab121276cf99b309129349a0 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jis.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/jis/jisg.tfm" 1463434352 468 53f854284f6afa6c36aaa2d1090ecc12 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/standard/tgoth10.tfm" 1463434352 856 7404843a5f798859944d7973a47821d5 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/ptex-fonts/standard/tmin10.tfm" 1463434352 856 39c171483fe1bb7d0e1368980c0c205b ""
+  "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmbx10.tfm" 1136768653 1328 c834bbb027764024c09d3d2bf908b5f0 ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi12.tfm" 1136768653 1524 4414a8315f39513458b80dfc63bff03a ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi6.tfm" 1136768653 1512 f21f83efb36853c0b70002322c1ab3ad ""
   "/usr/local/texlive/2025/texmf-dist/fonts/tfm/public/cm/cmmi8.tfm" 1136768653 1520 eccf95517727cb11801f4f1aee3a21b4 ""
@@ -52,8 +55,8 @@
   "/usr/local/texlive/2025/texmf-dist/web2c/texmf.cnf" 1739380943 42148 61becc7c670cd061bb319c643c27fdd4 ""
   "/usr/local/texlive/2025/texmf-var/web2c/euptex/platex.fmt" 1745490905 3336942 a3317c1e63f0e2be3426922707177eb4 ""
   "/usr/local/texlive/2025/texmf.cnf" 1741450484 577 418a7058ec8e006d8704f60ecd22c938 ""
-  "main.aux" 1768738814.37358 2437 2c780b391761f3c73776f67b2718b604 "latex"
-  "main.tex" 1768738813.09695 8728 559be2663bfea2fee29b4310f9c423f5 ""
+  "main.aux" 1769512876.59674 5168 3ca5583b5bab05104c65cc7c34a442a6 "latex"
+  "main.tex" 1769512875.70722 25522 2d352c19fade649fc719103d09ce47b2 ""
   (generated)
   "main.aux"
   "main.dvi"
